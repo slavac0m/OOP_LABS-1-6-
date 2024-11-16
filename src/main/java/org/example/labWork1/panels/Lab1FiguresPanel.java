@@ -1,7 +1,7 @@
 package org.example.labWork1.panels;
 
 import org.example.Utils;
-import org.example.labWork1.FigureFactory;
+import org.example.labWork1.CreateFigures;
 import org.example.labWork1.figures.Circle;
 import org.example.labWork1.figures.Line;
 import org.example.labWork1.figures.Rectangle;
@@ -23,11 +23,11 @@ public class Lab1FiguresPanel extends JPanel {
     private Line[] lines;
     private Triangle[] triangles;
 
-    private final FigureFactory figureFactory;
+    private final CreateFigures createFigures;
     private final Utils utils = new Utils();
 
     public Lab1FiguresPanel() {
-        figureFactory = new FigureFactory();
+        createFigures = new CreateFigures();
     }
 
     public void addOneCircle() {
@@ -37,7 +37,7 @@ public class Lab1FiguresPanel extends JPanel {
             circle = null;
             System.gc();
         }
-        circle = figureFactory.createRandomCircle();
+        circle = createFigures.createRandomCircle();
         repaint();
 
     }
@@ -49,7 +49,7 @@ public class Lab1FiguresPanel extends JPanel {
             circles = null;
             System.gc();
         }
-        circles = figureFactory.createRandomCircleList();
+        circles = createFigures.createRandomCircleList();
         repaint();
 
     }
@@ -117,7 +117,7 @@ public class Lab1FiguresPanel extends JPanel {
             line = null;
             System.gc();
         }
-        line = figureFactory.createRandomLine();
+        line = createFigures.createRandomLine();
         repaint();
 
     }
@@ -129,12 +129,12 @@ public class Lab1FiguresPanel extends JPanel {
             lines = null;
             System.gc();
         }
-        lines = figureFactory.createRandomLineList();
+        lines = createFigures.createRandomLineList();
         repaint();
     }
 
     public void moveLine() {
-        if (lines != null) {
+        if (line != null) {
             int dX = utils.getRandomInt(-50, 50);
             int dY = utils.getRandomInt(-50, 50);
             line.moveTo(dX, dY);
@@ -156,8 +156,8 @@ public class Lab1FiguresPanel extends JPanel {
 
     public void changeLine() {
         if (line != null) {
-            int r = utils.getRandomInt(20, 100);
-//            circle.changeRadius(r);
+            int angle = utils.getRandomInt(360);
+            line.rotate(angle);
         }
         repaint();
     }
@@ -165,8 +165,8 @@ public class Lab1FiguresPanel extends JPanel {
     public void changeLineList() {
         if (lines != null) {
             for (Line l: lines) {
-                int r = utils.getRandomInt(-50, 50);
-//                c.changeRadius(r);
+                int angle = utils.getRandomInt(360);
+                l.rotate(angle);
             }
         }
         repaint();
@@ -175,8 +175,8 @@ public class Lab1FiguresPanel extends JPanel {
     public void deleteLine() {
         if (line != null) {
             line.erase();
-            repaint();
             line = null;
+            repaint();
         }
     }
 
@@ -196,7 +196,7 @@ public class Lab1FiguresPanel extends JPanel {
             triangle = null;
             System.gc();
         }
-        triangle = figureFactory.createRandomTriangle();
+        triangle = createFigures.createRandomTriangle();
         repaint();
     }
 
@@ -207,7 +207,7 @@ public class Lab1FiguresPanel extends JPanel {
             triangles = null;
             System.gc();
         }
-        triangles = figureFactory.createRandomTriangleList();
+        triangles = createFigures.createRandomTriangleList();
         repaint();
 
     }
@@ -228,30 +228,27 @@ public class Lab1FiguresPanel extends JPanel {
                 int dY = utils.getRandomInt(-50, 50);
                 t.moveTo(dX, dY);
             }
-            ;
         }
         repaint();
 
     }
 
-    public void changeTriangle() {
-//        if (triangle != null) {
-//            int .nextInt(100) + 20;
-//            circle.changeRadius(r);
-//        }
-//        repaint();
-
+    public void rotateTriangle() {
+        if (triangle != null) {
+            int angle = utils.getRandomInt(360);
+            triangle.rotate(angle);
+        }
+        repaint();
     }
 
     public void changeTriangleList() {
         if (triangles != null) {
             for (Triangle t : triangles) {
-//                int r = rand.nextInt(100) + 20;
-//                e.changeRadius(r);
+                int angle = utils.getRandomInt(360);
+                t.rotate(angle);
             }
-
         }
-//        repaint();
+        repaint();
     }
 
     public void deleteTriangle() {
@@ -279,7 +276,7 @@ public class Lab1FiguresPanel extends JPanel {
             rectangle = null;
             System.gc();
         }
-        rectangle = figureFactory.createRandomRectangle();
+        rectangle = createFigures.createRandomRectangle();
         repaint();
 
     }
@@ -291,7 +288,7 @@ public class Lab1FiguresPanel extends JPanel {
             rectangles = null;
             System.gc();
         }
-        rectangles = figureFactory.createRandomRectangleList();
+        rectangles = createFigures.createRandomRectangleList();
         repaint();
 
     }
@@ -313,7 +310,6 @@ public class Lab1FiguresPanel extends JPanel {
                 int dY = utils.getRandomInt(-50, 50);
                 r.moveTo(dX, dY);
             }
-            ;
         }
         repaint();
 
@@ -409,7 +405,7 @@ public class Lab1FiguresPanel extends JPanel {
         super.paintComponent(g);
 
         if (circle != null) circle.show(g);
-        if (rectangle != null) rectangle.paint(g);
+        if (rectangle != null) rectangle.show(g);
         if (triangle != null) triangle.show(g);
         if (line != null) line.show(g);
 
@@ -418,7 +414,7 @@ public class Lab1FiguresPanel extends JPanel {
         if (circles != null)
             Arrays.stream(circles).forEach(circle -> circle.show(g));
         if (rectangles != null)
-            Arrays.stream(rectangles).forEach(rectangle -> rectangle.paint(g));
+            Arrays.stream(rectangles).forEach(rectangle -> rectangle.show(g));
 
         if (lines != null)
             Arrays.stream(lines).forEach(line -> line.show(g));

@@ -1,22 +1,22 @@
 package org.example.labWork2.figures;
 
-import org.example.labWork2.MyPoint;
+import org.example.MyPoint;
 
 import java.awt.*;
 
 public class Rectangle {
-    private MyPoint start;
+    private final MyPoint start;
 
     private int width;
-    private int high;
+    private int height;
 
     private Color color;
     private boolean visible = true;
 
-    public Rectangle(int x, int y, int width, int high, Color color) {
+    public Rectangle(int x, int y, int width, int height, Color color) {
         this.start = new MyPoint(x,y);
         this.width = width;
-        this.high = high;
+        this.height = height;
         this.color = color;
         System.out.println("[Create] " + this);
     }
@@ -25,7 +25,7 @@ public class Rectangle {
         this.start = new MyPoint(x,y);
         this.color = color;
         this.width = 10;
-        this.high = 20;
+        this.height = 20;
         System.out.println("[Create] " + this);
     }
 
@@ -34,26 +34,48 @@ public class Rectangle {
         System.out.println("[ERASED] " + this);
     }
 
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
     public void moveTo(int dX, int dY){
         start.setX(start.getX() + dX);
-        start.setY(start.getY() + dX);
+        start.setY(start.getY() + dY);
         System.out.println("[MOVE] " + this);
     }
 
     public void changeForm(int width, int high){
         this.width = width;
-        this.high = high;
+        this.height = high;
         System.out.println("[CHANGED] " + this);
+    }
+
+    public MyPoint getStart() {
+        return start;
     }
 
     public void show(Graphics graphics){
         if(!visible) return;
         graphics.setColor(color);
-        graphics.drawRect(start.getX(), start.getY(), width, high);
+        graphics.fillRect(start.getX(), start.getY(), width, height);
+        graphics.setColor(Color.BLACK);
+        graphics.drawRect(start.getX(), start.getY(), width, height);
     }
 
     public int getWidth() { return width; }
-    public int getHigh() { return high; }
+    public int getHeight() { return height; }
     public Color getColor() { return color; }
     public boolean isVisible() { return visible; }
 
@@ -62,7 +84,7 @@ public class Rectangle {
         return "Rectangle{" +
                 "start=" + start +
                 ", width=" + getWidth() +
-                ", high=" + getHigh() +
+                ", high=" + getHeight() +
                 ", color=" + getColor() +
                 ", visible=" + isVisible() +
                 '}';

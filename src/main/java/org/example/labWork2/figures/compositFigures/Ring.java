@@ -1,7 +1,7 @@
 package org.example.labWork2.figures.compositFigures;
 
 import org.example.labWork1.figures.Circle;
-import org.example.labWork2.MyPoint;
+import org.example.MyPoint;
 
 import java.awt.*;
 

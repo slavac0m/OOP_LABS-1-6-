@@ -7,7 +7,7 @@ public class Lab2ControlPanel extends JPanel {
 
     public Lab2ControlPanel(Lab2FiguresPanel lab2FiguresPanel) {
         JCheckBox arrayMode = new JCheckBox("Режим работы с массивами");
-        JComboBox<String> figureType = new JComboBox<>(new String[]{"Окружность", "Прямоугольник", "Треугольник", "Линия", "Кольцо"});
+        JComboBox<String> figureType = new JComboBox<>(new String[]{"Окружность", "Прямоугольник", "Треугольник", "Линия", "Кольцо", "Дом"});
 
         JButton moveButton = createMoveButton(lab2FiguresPanel, arrayMode, figureType);
         JButton createFigureButton = buildCreateButton(lab2FiguresPanel, arrayMode, figureType);
@@ -38,6 +38,7 @@ public class Lab2ControlPanel extends JPanel {
                 case "Треугольник" -> lab2FiguresPanel.deleteTriangleList();
                 case "Линия" -> lab2FiguresPanel.deleteLineList();
                 case "Кольцо" -> lab2FiguresPanel.deleteRingList();
+                case "Дом" -> lab2FiguresPanel.deleteHouseList();
             }
         } else {
             switch (selectedFigure) {
@@ -46,6 +47,7 @@ public class Lab2ControlPanel extends JPanel {
                 case "Треугольник" -> lab2FiguresPanel.deleteTriangle();
                 case "Линия" -> lab2FiguresPanel.deleteLine();
                 case "Кольцо" -> lab2FiguresPanel.deleteRing();
+                case "Дом" -> lab2FiguresPanel.deleteHouse();
             }
         }
     }
@@ -61,6 +63,7 @@ public class Lab2ControlPanel extends JPanel {
                     case "Треугольник" -> lab2FiguresPanel.addTriangleList();
                     case "Линия" -> lab2FiguresPanel.addLineList();
                     case "Кольцо" -> lab2FiguresPanel.addRingList();
+                    case "Дом" -> lab2FiguresPanel.addHouseList();
                 }
             } else {
                 switch (selectedFigure) {
@@ -69,6 +72,7 @@ public class Lab2ControlPanel extends JPanel {
                     case "Треугольник" -> lab2FiguresPanel.addOneTriangle();
                     case "Линия" -> lab2FiguresPanel.addOneLine();
                     case "Кольцо" -> lab2FiguresPanel.addOneRing();
+                    case "Дом" -> lab2FiguresPanel.addOneHouse();
                 }
             }
         });
@@ -87,6 +91,7 @@ public class Lab2ControlPanel extends JPanel {
                     case "Треугольник" -> lab2FiguresPanel.changeTriangleList();
                     case "Линия" -> lab2FiguresPanel.changeLineList();
                     case "Кольцо" -> lab2FiguresPanel.changeRingList();
+                    case "Дом" -> lab2FiguresPanel.changeHouseList();
                 }
             } else {
                 switch (selectedFigure) {
@@ -95,6 +100,7 @@ public class Lab2ControlPanel extends JPanel {
                     case "Треугольник" -> lab2FiguresPanel.changeTriangle();
                     case "Линия" -> lab2FiguresPanel.changeLine();
                     case "Кольцо" -> lab2FiguresPanel.changeRing();
+                    case "Дом" -> lab2FiguresPanel.changeHouse();
                 }
             }
         });
@@ -113,6 +119,7 @@ public class Lab2ControlPanel extends JPanel {
                     case "Треугольник" -> lab2FiguresPanel.moveTriangleList();
                     case "Линия" -> lab2FiguresPanel.moveLineList();
                     case "Кольцо" -> lab2FiguresPanel.moveRingList();
+                    case "Дом" -> lab2FiguresPanel.moveHouseList();
                 }
             } else {
                 switch (Objects.requireNonNull(figureType.getSelectedItem()).toString()) {
@@ -121,6 +128,7 @@ public class Lab2ControlPanel extends JPanel {
                     case "Треугольник" -> lab2FiguresPanel.moveTriangle();
                     case "Линия" -> lab2FiguresPanel.moveLine();
                     case "Кольцо" -> lab2FiguresPanel.moveRing();
+                    case "Дом" -> lab2FiguresPanel.moveHouse();
                 }
             }
         });

@@ -16,7 +16,7 @@ public class Lab1ControlPanel extends JPanel {
         JButton deleteFigureButton = new JButton("Удалить фигуру");
         deleteFigureButton.addActionListener(e -> deleteFigures(lab1FiguresPanel, arrayMode, figureType));
 
-        JButton deleteAllFigureButton = new JButton("Удалить");
+        JButton deleteAllFigureButton = new JButton("Удалить всё");
         deleteAllFigureButton.addActionListener(e -> lab1FiguresPanel.clearFrame());
 
         add(figureType);
@@ -73,7 +73,7 @@ public class Lab1ControlPanel extends JPanel {
     }
 
     private JButton buildChangeFigureButton(Lab1FiguresPanel lab1FiguresPanel, JCheckBox arrayMode, JComboBox<String> figureType) {
-        JButton changeFigureButton = new JButton("Change");
+        JButton changeFigureButton = new JButton("Изменить");
         changeFigureButton.addActionListener(e -> {
             String selectedFigure = Objects.requireNonNull(figureType.getSelectedItem()).toString();
 
@@ -88,7 +88,7 @@ public class Lab1ControlPanel extends JPanel {
                 switch (selectedFigure) {
                     case "Окружность" -> lab1FiguresPanel.changeCircle();
                     case "Прямоугольник" -> lab1FiguresPanel.changeRectangle();
-                    case "Треугольник" -> lab1FiguresPanel.changeTriangle();
+                    case "Треугольник" -> lab1FiguresPanel.rotateTriangle();
                     case "Линия" -> lab1FiguresPanel.changeLine();
                 }
             }
@@ -106,7 +106,7 @@ public class Lab1ControlPanel extends JPanel {
                     case "Окружность" -> lab1FiguresPanel.moveCircleList();
                     case "Прямоугольник" -> lab1FiguresPanel.moveRectangleList();
                     case "Треугольник" -> lab1FiguresPanel.moveTriangleList();
-                    case "Линия" -> lab1FiguresPanel.moveLine();
+                    case "Линия" -> lab1FiguresPanel.moveLineList();
                 }
             } else {
                 switch (Objects.requireNonNull(figureType.getSelectedItem()).toString()) {

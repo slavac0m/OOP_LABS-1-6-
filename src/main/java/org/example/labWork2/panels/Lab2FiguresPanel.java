@@ -1,11 +1,12 @@
 package org.example.labWork2.panels;
 
 import org.example.Utils;
-import org.example.labWork2.FigureFactory;
+import org.example.labWork2.CreateFigures;
 import org.example.labWork2.figures.Circle;
 import org.example.labWork2.figures.Line;
 import org.example.labWork2.figures.Rectangle;
 import org.example.labWork2.figures.Triangle;
+import org.example.labWork2.figures.compositFigures.House;
 import org.example.labWork2.figures.compositFigures.Ring;
 
 import javax.swing.*;
@@ -18,19 +19,101 @@ public class Lab2FiguresPanel extends JPanel {
     private Rectangle rectangle;
     private Line line;
     private Triangle triangle;
+
     private Ring ring;
+    private House house;
 
     private Circle[] circles;
     private Rectangle[] rectangles;
     private Line[] lines;
     private Triangle[] triangles;
     private Ring[] rings;
+    private House[] houses;
 
-    private final FigureFactory figureFactory;
+    private final CreateFigures createFigures;
     private final Utils utils = new Utils();
 
     public Lab2FiguresPanel() {
-        figureFactory = new FigureFactory();
+        createFigures = new CreateFigures();
+    }
+
+    public void addOneHouse() {
+        if (house != null) {
+            house.erase();
+            repaint();
+            house = null;
+            System.gc();
+        }
+        house = createFigures.createRandomHouse();
+        repaint();
+    }
+
+    public void addHouseList() {
+        if (houses != null) {
+            Arrays.stream(houses).forEach(House::erase);
+            repaint();
+            houses = null;
+            System.gc();
+        }
+        houses = createFigures.createHouseList();
+        repaint();
+    }
+
+    public void moveHouse() {
+        if (house != null) {
+            int dX = utils.getRandomInt(-50, 50);
+            int dY = utils.getRandomInt(-50, 50);
+            house.moveTo(dX, dY);
+        }
+        repaint();
+    }
+
+    public void moveHouseList() {
+        if (houses != null) {
+            for (House h : houses) {
+                int dX = utils.getRandomInt(-50, 50);
+                int dY = utils.getRandomInt(-50, 50);
+                h.moveTo(dX, dY);
+            }
+        }
+        repaint();
+    }
+
+    public void changeHouse() {
+        if (house != null) {
+            Color baseColor = utils.getRandomColor();
+            Color roofColor = utils.getRandomColor();
+            house.editColor(baseColor, roofColor);
+        }
+        repaint();
+    }
+
+    public void changeHouseList() {
+        if (houses != null) {
+            for (House h : houses) {
+                Color baseColor = utils.getRandomColor();
+                Color roofColor = utils.getRandomColor();
+                h.editColor(baseColor, roofColor);
+            }
+        }
+        repaint();
+    }
+
+    public void deleteHouse() {
+        if (house != null) {
+            house.erase();
+            repaint();
+            house = null;
+        }
+    }
+
+    public void deleteHouseList() {
+        if (houses != null) {
+            Arrays.stream(houses).forEach(House::erase);
+            repaint();
+            Arrays.fill(houses, null);
+            houses = null;
+        }
     }
 
     public void addOneCircle() {
@@ -40,9 +123,8 @@ public class Lab2FiguresPanel extends JPanel {
             circle = null;
             System.gc();
         }
-        circle = figureFactory.createRandomCircle();
+        circle = createFigures.createRandomCircle();
         repaint();
-
     }
 
     public void addCircleList() {
@@ -52,7 +134,7 @@ public class Lab2FiguresPanel extends JPanel {
             circles = null;
             System.gc();
         }
-        circles = figureFactory.createRandomCircleList();
+        circles = createFigures.createRandomCircleList();
         repaint();
 
     }
@@ -75,7 +157,6 @@ public class Lab2FiguresPanel extends JPanel {
             }
         }
         repaint();
-
     }
 
     public void changeCircle() {
@@ -120,7 +201,7 @@ public class Lab2FiguresPanel extends JPanel {
             line = null;
             System.gc();
         }
-        line = figureFactory.createRandomLine();
+        line = createFigures.createRandomLine();
         repaint();
 
     }
@@ -132,7 +213,7 @@ public class Lab2FiguresPanel extends JPanel {
             lines = null;
             System.gc();
         }
-        lines = figureFactory.createRandomLineList();
+        lines = createFigures.createRandomLineList();
         repaint();
     }
 
@@ -158,8 +239,8 @@ public class Lab2FiguresPanel extends JPanel {
 
     public void changeLine() {
         if (line != null) {
-            int r = utils.getRandomInt(20, 100);
-//            circle.changeRadius(r);
+            int angle = utils.getRandomInt(360);
+            line.rotate(angle);
         }
         repaint();
     }
@@ -167,8 +248,8 @@ public class Lab2FiguresPanel extends JPanel {
     public void changeLineList() {
         if (lines != null) {
             for (Line l : lines) {
-                int r = utils.getRandomInt(-50, 50);
-//                c.changeRadius(r);
+                int angle = utils.getRandomInt(360);
+                l.rotate(angle);
             }
         }
         repaint();
@@ -198,7 +279,7 @@ public class Lab2FiguresPanel extends JPanel {
             triangle = null;
             System.gc();
         }
-        triangle = figureFactory.createRandomTriangle();
+        triangle = createFigures.createRandomTriangle();
         repaint();
     }
 
@@ -209,7 +290,7 @@ public class Lab2FiguresPanel extends JPanel {
             triangles = null;
             System.gc();
         }
-        triangles = figureFactory.createRandomTriangleList();
+        triangles = createFigures.createRandomTriangleList();
         repaint();
 
     }
@@ -237,23 +318,21 @@ public class Lab2FiguresPanel extends JPanel {
     }
 
     public void changeTriangle() {
-//        if (triangle != null) {
-//            int .nextInt(100) + 20;
-//            circle.changeRadius(r);
-//        }
-//        repaint();
-
+        if (triangle != null) {
+            int angle = utils.getRandomInt(360);
+            triangle.rotate(angle);
+        }
+        repaint();
     }
 
     public void changeTriangleList() {
         if (triangles != null) {
             for (Triangle t : triangles) {
-//                int r = rand.nextInt(100) + 20;
-//                e.changeRadius(r);
+                int angle = utils.getRandomInt(360);
+                t.rotate(angle);
             }
-
         }
-//        repaint();
+        repaint();
     }
 
     public void deleteTriangle() {
@@ -280,7 +359,7 @@ public class Lab2FiguresPanel extends JPanel {
             rectangle = null;
             System.gc();
         }
-        rectangle = figureFactory.createRandomRectangle();
+        rectangle = createFigures.createRandomRectangle();
         repaint();
 
     }
@@ -292,7 +371,7 @@ public class Lab2FiguresPanel extends JPanel {
             rectangles = null;
             System.gc();
         }
-        rectangles = figureFactory.createRandomRectangleList();
+        rectangles = createFigures.createRandomRectangleList();
         repaint();
 
     }
@@ -314,7 +393,6 @@ public class Lab2FiguresPanel extends JPanel {
                 int dY = utils.getRandomInt(-50, 50);
                 r.moveTo(dX, dY);
             }
-            ;
         }
         repaint();
 
@@ -327,7 +405,6 @@ public class Lab2FiguresPanel extends JPanel {
             rectangle.changeForm(diffWidth, diffHeight);
         }
         repaint();
-
     }
 
     public void changeRectangleList() {
@@ -363,7 +440,7 @@ public class Lab2FiguresPanel extends JPanel {
             ring = null;
             System.gc();
         }
-        ring = figureFactory.createRing();
+        ring = createFigures.createRing();
         repaint();
     }
 
@@ -374,7 +451,7 @@ public class Lab2FiguresPanel extends JPanel {
             rings = null;
             System.gc();
         }
-        rings = figureFactory.createRingList();
+        rings = createFigures.createRingList();
         repaint();
     }
 
@@ -434,63 +511,19 @@ public class Lab2FiguresPanel extends JPanel {
     }
 
     public void clearFrame() {
-        if (circle != null) {
-            circle.hide();
-            repaint();
-            circle = null;
-        }
-        if (rectangle != null) {
-            rectangle.erase();
-            repaint();
-            rectangle = null;
-        }
-        if (line != null) {
-            line.erase();
-            repaint();
-            line = null;
-        }
-        if (triangle != null) {
-            triangle.erase();
-            repaint();
-            triangle = null;
-        }
+        if (line != null) deleteLine();
+        if (circle != null)  deleteCircle();
+        if (rectangle != null) deleteRectangle();
+        if (triangle != null) deleteRectangle();
+        if (ring != null) deleteRing();
+        if (house != null) deleteHouse();
 
-        if (circles != null) {
-            Arrays.stream(circles).forEach(Circle::hide);
-            repaint();
-            Arrays.fill(circles, null);
-            circles = null;
-        }
-        if (triangles != null) {
-            Arrays.stream(triangles).forEach(Triangle::erase);
-            repaint();
-            Arrays.fill(triangles, null);
-            triangles = null;
-        }
-        if (lines != null) {
-            Arrays.stream(lines).forEach(Line::erase);
-            repaint();
-            Arrays.fill(lines, null);
-            lines = null;
-        }
-        if (rectangles != null) {
-            Arrays.stream(rectangles).forEach(Rectangle::erase);
-            repaint();
-            Arrays.fill(rectangles, null);
-            rectangles = null;
-        }
-        if (ring != null) {
-            ring.hide();
-            repaint();
-            ring = null;
-        }
-        if (rings != null) {
-            Arrays.stream(rings).forEach(Ring::hide);
-            repaint();
-            Arrays.fill(rings, null);
-            rings = null;
-        }
-
+        if (lines != null) deleteLineList();
+        if (circles != null) deleteCircleList();
+        if (rectangles != null) deleteRectangleList();
+        if (triangles != null) deleteTriangleList();
+        if (rings != null) deleteRingList();
+        if (houses != null) deleteHouseList();
         System.gc();
     }
 
@@ -503,6 +536,7 @@ public class Lab2FiguresPanel extends JPanel {
         if (triangle != null) triangle.show(g);
         if (line != null) line.show(g);
         if (ring != null) ring.show(g);
+        if (house != null) house.show(g);
 
         if (triangles != null)
             Arrays.stream(triangles).forEach(triangle -> triangle.show(g));
@@ -514,5 +548,7 @@ public class Lab2FiguresPanel extends JPanel {
             Arrays.stream(lines).forEach(line -> line.show(g));
         if (rings != null)
             Arrays.stream(rings).forEach(ring -> ring.show(g));
+        if(houses != null)
+            Arrays.stream(houses).forEach(house -> house.show(g));
     }
 }

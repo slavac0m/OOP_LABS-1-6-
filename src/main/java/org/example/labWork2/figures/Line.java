@@ -1,7 +1,7 @@
 package org.example.labWork2.figures;
 
 import org.example.Constants;
-import org.example.labWork2.MyPoint;
+import org.example.MyPoint;
 
 import java.awt.*;
 
@@ -27,15 +27,20 @@ public class Line {
     public void moveTo(int dX, int dY) {
         start.setX(start.getX() + dX);
         end.setX(end.getX() + dX);
-        
+
         start.setY(start.getY() + dY);
         end.setY(end.getY() + dY);
         System.out.println("[MOVE] " + this);
     }
 
 
-    public Color getColor() { return color; }
-    public boolean isVisible() { return visible; }
+    public Color getColor() {
+        return color;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
 
     @Override
     public String toString() {
@@ -54,9 +59,26 @@ public class Line {
 
     public void show(Graphics g) {
         if (!visible) return;
-
         g.setColor(color);
-        g.drawLine(start.getX(),start.getY(),end.getX(),end.getY());
+        g.drawLine(start.getX(), start.getY(), end.getX(), end.getY());
+    }
+
+    public void rotate(int angle) {
+        int centerX = (start.getX() + end.getX()) / 2;
+        int centerY = (start.getY() + end.getY()) / 2;
+
+        double angleRadians = Math.toRadians(angle);
+        int newStartX = (int) (centerX + (start.getX() - centerX) * Math.cos(angleRadians) - (start.getY() - centerY) * Math.sin(angleRadians));
+        int newStartY = (int) (centerY + (start.getX() - centerX) * Math.sin(angleRadians) + (start.getY() - centerY) * Math.cos(angleRadians));
+        int newEndX = (int) (centerX + (end.getX() - centerX) * Math.cos(angleRadians) - (end.getY() - centerY) * Math.sin(angleRadians));
+        int newEndY = (int) (centerY + (end.getX() - centerX) * Math.sin(angleRadians) + (end.getY() - centerY) * Math.cos(angleRadians));
+
+
+        start.setX(newStartX);
+        start.setY(newStartY);
+        end.setX(newEndX);
+        end.setY(newEndY);
+        System.out.println("[ROTATE] angle=" + angle + "\t" + this);
     }
 
     @Override

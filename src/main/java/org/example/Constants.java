@@ -9,6 +9,6 @@ public class Constants {
     public final static int COUNT_OF_FIGURES = 10;
 
 
-    public static final Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE};
+    public static final Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE,Color.CYAN, Color.DARK_GRAY, Color.ORANGE, Color.YELLOW};
 
 }

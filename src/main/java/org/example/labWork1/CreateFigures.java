@@ -9,13 +9,13 @@ import org.example.labWork1.figures.Triangle;
 
 import java.awt.*;
 
-public class FigureFactory {
+public class CreateFigures {
     Utils utils = new Utils();
 
     private final int frameWidth;
     private final int frameHeight;
 
-    public FigureFactory() {
+    public CreateFigures() {
         this.frameWidth = Constants.FRAME_WIDTH;
         this.frameHeight = Constants.FRAME_HIGH;
     }

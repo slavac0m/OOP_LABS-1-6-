@@ -7,16 +7,16 @@ public class Rectangle {
     private int y;
 
     private int width;
-    private int high;
+    private int height;
 
     private Color color;
     private boolean visible = true;
 
-    public Rectangle(int x, int y, int width, int high, Color color) {
+    public Rectangle(int x, int y, int width, int height, Color color) {
         this.x = x;
         this.y = y;
         this.width = width;
-        this.high = high;
+        this.height = height;
         this.color = color;
 
         System.out.println("[Create] " + this);
@@ -27,45 +27,59 @@ public class Rectangle {
         this.y = y;
         this.color = color;
         this.width = 10;
-        this.high = 20;
+        this.height = 20;
 
         System.out.println("[Create] " + this);
     }
 
-    public void erase(){
+    public void erase() {
         visible = false;
         System.out.println("[ERASED] " + this);
     }
 
-    public void moveTo(int dX, int dY){
+    public void moveTo(int dX, int dY) {
         x += dX;
         y += dY;
         System.out.println("[MOVE] " + this);
     }
 
-    public void changeForm(int width, int high){
+    public void changeForm(int width, int high) {
         this.width = width;
-        this.high = high;
+        this.height = high;
         System.out.println("[CHANGED] " + this);
     }
 
-    public void paint(Graphics graphics){
-        if(!visible) return;
+    public void show(Graphics graphics) {
+        if (!visible) return;
         graphics.setColor(color);
-        graphics.drawRect(x, y, width, high);
+        graphics.fillRect(x, y, width, height);
+        graphics.setColor(Color.BLACK);
+        graphics.drawRect(x, y, width, height);
     }
 
     public int getX() {
         return x;
     }
+
     public int getY() {
         return y;
     }
 
-    public int getWidth() { return width; }
-    public int getHigh() { return high; }
-    public Color getColor() { return color; }
-    public boolean isVisible() { return visible; }
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
 
     @Override
     public String toString() {
@@ -73,7 +87,7 @@ public class Rectangle {
                 "x=" + getX() +
                 ", y=" + getY() +
                 ", width=" + getWidth() +
-                ", high=" + getHigh() +
+                ", high=" + getHeight() +
                 ", color=" + getColor() +
                 ", visible=" + isVisible() +
                 '}';

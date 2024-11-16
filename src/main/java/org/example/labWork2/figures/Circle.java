@@ -1,7 +1,7 @@
 package org.example.labWork2.figures;
 
 import org.example.Constants;
-import org.example.labWork2.MyPoint;
+import org.example.MyPoint;
 
 import java.awt.*;
 
@@ -74,9 +74,9 @@ public class Circle {
     }
 
     private void validSize(){
-        if(center.getX() + r > Constants.FRAME_WIDTH) setRadius(Constants.FRAME_WIDTH - center.getX());
+        if(center.getX() + r > Constants.FRAME_WIDTH - 20) setRadius(Constants.FRAME_WIDTH -20 - center.getX());
         if(center.getX() - r < 0) setRadius(center.getX());
-        if(center.getY() + r > Constants.FRAME_HIGH) setRadius(Constants.FRAME_HIGH - center.getY());
+        if(center.getY() + r > Constants.FRAME_HIGH - 78) setRadius(Constants.FRAME_HIGH -78 - center.getY());
         if(center.getY() - r < 0) setRadius(center.getY());
     }
 
@@ -84,4 +84,5 @@ public class Circle {
         visible = false;
         System.out.println("[HIDE] " + this);
     }
+
 }

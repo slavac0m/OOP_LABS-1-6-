@@ -1,22 +1,24 @@
 package org.example.labWork2;
 
 import org.example.Constants;
+import org.example.MyPoint;
 import org.example.Utils;
 import org.example.labWork2.figures.Circle;
 import org.example.labWork2.figures.Line;
 import org.example.labWork2.figures.Rectangle;
 import org.example.labWork2.figures.Triangle;
+import org.example.labWork2.figures.compositFigures.House;
 import org.example.labWork2.figures.compositFigures.Ring;
 
 import java.awt.*;
 
-public class FigureFactory {
+public class CreateFigures {
     Utils utils = new Utils();
 
     private final int frameWidth;
     private final int frameHeight;
 
-    public FigureFactory() {
+    public CreateFigures() {
         this.frameWidth = Constants.FRAME_WIDTH;
         this.frameHeight = Constants.FRAME_HIGH;
     }
@@ -26,6 +28,23 @@ public class FigureFactory {
         int y = utils.getRandomInt(frameHeight);
         Color color = utils.getRandomColor();
         return new Circle(x, y, color);
+    }
+
+    public House createRandomHouse() {
+        int x = utils.getRandomInt(frameWidth);
+        int y = utils.getRandomInt(frameHeight);
+        int baseWidth = utils.getRandomInt(50,150);
+        int baseHeight = utils.getRandomInt(50,150);
+        int roofHeight = utils.getRandomInt(20,55);
+        Color baseColor = utils.getRandomColor();
+        Color roofColor = utils.getRandomColor();
+        return new House(x, y, baseWidth,baseHeight,roofHeight,baseColor, roofColor);
+    }
+
+    public House[] createHouseList(){
+        House[] houses = new House[Constants.COUNT_OF_FIGURES];
+        for (int i = 0; i < houses.length; i++) houses[i] = createRandomHouse();
+        return houses;
     }
 
     public Rectangle createRandomRectangle() {
@@ -68,7 +87,7 @@ public class FigureFactory {
             int r = utils.getRandomInt(60);
             int y = utils.getRandomInt(frameHeight);
             Color color = utils.getRandomColor();
-            circles[i] =  new Circle(x, y, color);;
+            circles[i] =  new Circle(x, y, r, color);;
         }
         return circles;
     }

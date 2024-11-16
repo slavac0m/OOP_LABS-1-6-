@@ -31,12 +31,12 @@ public class Circle {
     public void moveTo(int dX, int dY) {
         x += dX;
         y += dY;
-        System.out.println("[MOVE] " + this);
+        System.out.println("[MOVE] dX=" + dX + ", dY=" + "\t" + this);
     }
 
     public void setRadius(int newR) {
         r = newR;
-        System.out.println("[EDIT RADIUS] " + this);
+        System.out.println("[EDIT RADIUS] newR=" + r + "\t" + this);
     }
 
     public void show(Graphics graphics) {
@@ -57,11 +57,17 @@ public class Circle {
         return y;
     }
 
-    public int getR() { return r; }
+    public int getR() {
+        return r;
+    }
 
-    public Color getColor() { return color; }
+    public Color getColor() {
+        return color;
+    }
 
-    public boolean isVisible() { return visible; }
+    public boolean isVisible() {
+        return visible;
+    }
 
     @Override
     public String toString() {
@@ -70,7 +76,7 @@ public class Circle {
                 ", centerY=" + getY() +
                 ", r=" + getR() +
                 ", color=" + getColor() +
-                ", visible=" + isVisible()+
+                ", visible=" + isVisible() +
                 '}';
     }
 
