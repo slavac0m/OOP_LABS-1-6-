@@ -3,8 +3,8 @@ package org.example.labWork1.figures;
 import java.awt.*;
 
 public class Rectangle {
-    private int centerX;
-    private int centerY;
+    private int x;
+    private int y;
 
     private int width;
     private int high;
@@ -12,9 +12,9 @@ public class Rectangle {
     private Color color;
     private boolean visible = true;
 
-    public Rectangle(int centerX, int centerY, int width, int high, Color color) {
-        this.centerX = centerX;
-        this.centerY = centerY;
+    public Rectangle(int x, int y, int width, int high, Color color) {
+        this.x = x;
+        this.y = y;
         this.width = width;
         this.high = high;
         this.color = color;
@@ -22,18 +22,18 @@ public class Rectangle {
         System.out.println("Rectangle created " + this.toString());
     }
 
-    public Rectangle(int centerX, int centerY, Color color) {
+    public Rectangle(int x, int y, Color color) {
         this.color = color;
-        this.centerX = centerX;
-        this.centerY = centerY;
+        this.x = x;
+        this.y = y;
         this.width = 10;
         this.high = 20;
 
         System.out.println("Rectangle created " + this.toString());
     }
     public Rectangle(){
-        this.centerX = 0;
-        this.centerY = 0;
+        this.x = 0;
+        this.y = 0;
         this.width = 10;
         this.high = 20;
 
@@ -46,17 +46,15 @@ public class Rectangle {
     }
 
     public void moveTo(int diffX, int diffY){
-        centerX += diffX;
-        centerY += diffY;
-
-        System.out.println("Rectangle moved at " + centerX + ", " + centerY);
+        x += diffX;
+        y += diffY;
+        System.out.println("Rectangle moved at " + x + ", " + y);
     }
 
-    public void changeForm(int newSmallSemiAxis, int newLargeSemiAxis){
-        this.width = newSmallSemiAxis;
-        this.high = newLargeSemiAxis;
-
-        System.out.println("Rectangle changed width: " + width + ", high: " + high);
+    public void changeForm(int width, int high){
+        this.width = width;
+        this.high = high;
+        System.out.println("Rectangle changed width: " + this.width + ", high: " + this.high);
     }
 
     public void paint(Graphics graphics){
@@ -67,24 +65,23 @@ public class Rectangle {
         }
 
         graphics.setColor(color);
-        graphics.fillRect(centerX - width / 2, centerY - high / 2, width, high);
-
+        graphics.fillRect(x,y, width, high);
         graphics.setColor(lineColor);
-        graphics.drawRect(centerX - width / 2, centerY - high / 2, width, high);
+        graphics.drawRect(x, y, width, high);
     }
 
-    public int getCenterX() {
-        return centerX;
+    public int getX() {
+        return x;
     }
-    public int getCenterY() {
-        return centerY;
+    public int getY() {
+        return y;
     }
 
     @Override
     public String toString() {
         return "Rectangle{" +
-                "centerX=" + centerX +
-                ", centerY=" + centerY +
+                "x=" + x +
+                ", y=" + y +
                 ", width=" + width +
                 ", high=" + high +
                 ", color=" + color +

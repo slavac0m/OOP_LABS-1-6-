@@ -1,7 +1,7 @@
 package org.example;
 
-import org.example.labWork1.panels.ControlPanel;
-import org.example.labWork1.panels.FiguresPanel;
+import org.example.labWork1.panels.Lab1ControlPanel;
+import org.example.labWork1.panels.Lab1FiguresPanel;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -12,8 +12,8 @@ public class Main {
         MainFrame mainFrame;
         switch (choice){
             case "1" ->{
-                FiguresPanel f = new FiguresPanel();
-                mainFrame = new MainFrame(choice, f, new ControlPanel(f));
+                Lab1FiguresPanel f = new Lab1FiguresPanel();
+                mainFrame = new MainFrame(choice, f, new Lab1ControlPanel(f));
                 mainFrame.setVisible(true);
             }
             case "2" ->{}
