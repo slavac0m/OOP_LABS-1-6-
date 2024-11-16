@@ -1,36 +1,37 @@
-package org.example.labWork1.figures;
+package org.example.labWork2.figures;
+
+import org.example.Constants;
+import org.example.labWork2.MyPoint;
 
 import java.awt.*;
 
+
 public class Circle {
-    private int x;
-    private int y;
-
+    private final MyPoint center;
     private int r;
-
     private final Color color;
     private boolean visible = true;
 
     public Circle(int x, int y, int r, Color color) {
-        this.x = x;
-        this.y = y;
+        this.center = new MyPoint(x, y);
         this.r = r;
         this.color = color;
+        validSize();
         System.out.println("[CREATE] " + this);
     }
 
 
     public Circle(int x, int y, Color color) {
-        this.x = x;
-        this.y = y;
+        this.center = new MyPoint(x,y);
         this.r = 20;
         this.color = color;
+        validSize();
         System.out.println("[CREATE] " + this);
     }
 
     public void moveTo(int dX, int dY) {
-        x += dX;
-        y += dY;
+        center.setX(center.getX() + dY);
+        center.setY(center.getY() + dY);
         System.out.println("[MOVE] " + this);
     }
 
@@ -43,19 +44,12 @@ public class Circle {
         if (!visible) return;
         Color lineColor = Color.BLACK;
         graphics.setColor(color);
-        graphics.fillOval(x - r, y - r, r * 2, r * 2);
+        graphics.fillOval(center.getX() - r, center.getY() - r, r * 2, r * 2);
         graphics.setColor(lineColor);
-        graphics.drawOval(x - r, y - r, r * 2, r * 2);
+        graphics.drawOval(center.getX()- r, center.getY() - r, r * 2, r * 2);
         System.out.println("[SHOW] " + this);
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
 
     public int getR() { return r; }
 
@@ -66,8 +60,7 @@ public class Circle {
     @Override
     public String toString() {
         return "Circle{" +
-                "centerX=" + getX() +
-                ", centerY=" + getY() +
+                "center=" + center +
                 ", r=" + getR() +
                 ", color=" + getColor() +
                 ", visible=" + isVisible()+
@@ -78,6 +71,13 @@ public class Circle {
     protected void finalize() throws Throwable {
         super.finalize();
         System.out.println("[FINALIZE] " + this);
+    }
+
+    private void validSize(){
+        if(center.getX() + r > Constants.FRAME_WIDTH) setRadius(Constants.FRAME_WIDTH - center.getX());
+        if(center.getX() - r < 0) setRadius(center.getX());
+        if(center.getY() + r > Constants.FRAME_HIGH) setRadius(Constants.FRAME_HIGH - center.getY());
+        if(center.getY() - r < 0) setRadius(center.getY());
     }
 
     public void hide() {

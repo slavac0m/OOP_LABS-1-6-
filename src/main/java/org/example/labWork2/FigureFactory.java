@@ -1,11 +1,12 @@
-package org.example.labWork1;
+package org.example.labWork2;
 
 import org.example.Constants;
 import org.example.Utils;
-import org.example.labWork1.figures.Circle;
-import org.example.labWork1.figures.Line;
-import org.example.labWork1.figures.Rectangle;
-import org.example.labWork1.figures.Triangle;
+import org.example.labWork2.figures.Circle;
+import org.example.labWork2.figures.Line;
+import org.example.labWork2.figures.Rectangle;
+import org.example.labWork2.figures.Triangle;
+import org.example.labWork2.figures.compositFigures.Ring;
 
 import java.awt.*;
 
@@ -35,13 +36,20 @@ public class FigureFactory {
     }
 
     public Triangle createRandomTriangle() {
-        int x1 = utils.getRandomInt(frameWidth);
-        int x2 = utils.getRandomInt(frameWidth);
-        int x3 = utils.getRandomInt(frameWidth);
-        int y1 = utils.getRandomInt(frameHeight);
-        int y2 = utils.getRandomInt(frameHeight);
-        int y3 = utils.getRandomInt(frameHeight);
-        return new Triangle(new int[]{x1, x2, x3}, new int[]{y1, y2, y3});
+        MyPoint point1 = new MyPoint(
+                utils.getRandomInt(frameWidth),
+                utils.getRandomInt(frameHeight)
+        );
+        MyPoint point2 = new MyPoint(
+                utils.getRandomInt(frameWidth),
+                utils.getRandomInt(frameHeight)
+        );
+        MyPoint point3 = new MyPoint(
+                utils.getRandomInt(frameWidth),
+                utils.getRandomInt(frameHeight)
+        );
+
+        return new Triangle(new MyPoint[]{point1, point2, point3});
     }
 
     public Line createRandomLine() {
@@ -81,14 +89,20 @@ public class FigureFactory {
     public Triangle[] createRandomTriangleList() {
         Triangle[] triangles = new Triangle[Constants.COUNT_OF_FIGURES];
         for (int i = 0; i < triangles.length; i++){
-            int x1 = utils.getRandomInt(frameWidth);
-            int x2 = utils.getRandomInt(frameWidth);
-            int x3 = utils.getRandomInt(frameWidth);
-            int y1 = utils.getRandomInt(frameHeight);
-            int y2 = utils.getRandomInt(frameHeight);
-            int y3 = utils.getRandomInt(frameHeight);
+            MyPoint point1 = new MyPoint(
+                    utils.getRandomInt(frameWidth),
+                    utils.getRandomInt(frameHeight)
+            );
+            MyPoint point2 = new MyPoint(
+                    utils.getRandomInt(frameWidth),
+                    utils.getRandomInt(frameHeight)
+            );
+            MyPoint point3 = new MyPoint(
+                    utils.getRandomInt(frameWidth),
+                    utils.getRandomInt(frameHeight)
+            );
             Color color = new Utils().getRandomColor();
-            triangles[i] =  new Triangle(new int[]{x1, x2, x3}, new int[]{y1, y2, y3}, color);
+            triangles[i] =  new Triangle(new MyPoint[]{point1, point2, point3}, color);
         }
         return triangles;
     }
@@ -103,5 +117,27 @@ public class FigureFactory {
             lines[i] = new Line(startX, startY, endX, endY);
         }
         return lines;
+    }
+
+    public Ring createRing(){
+        int x = utils.getRandomInt(frameWidth);
+        int y = utils.getRandomInt(frameHeight);
+        int innerR = utils.getRandomInt(20,50);
+        int outerR = innerR + utils.getRandomInt(10, 40);
+        Color color = utils.getRandomColor();
+        return new Ring(new MyPoint(x,y),innerR, outerR,color);
+    }
+
+    public Ring[] createRingList(){
+        Ring[] rings = new Ring[Constants.COUNT_OF_FIGURES];
+        for (int i = 0; i < rings.length; i++) {
+            int x = utils.getRandomInt(frameWidth);
+            int y = utils.getRandomInt(frameHeight);
+            int innerR = utils.getRandomInt(20,50);
+            int outerR = innerR + utils.getRandomInt(10, 40);
+            Color color = utils.getRandomColor();
+            rings[i] = new Ring(new MyPoint(x,y),innerR, outerR,color);
+        }
+        return rings;
     }
 }

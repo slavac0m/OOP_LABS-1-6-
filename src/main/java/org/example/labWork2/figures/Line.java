@@ -1,54 +1,47 @@
-package org.example.labWork1.figures;
+package org.example.labWork2.figures;
 
 import org.example.Constants;
+import org.example.labWork2.MyPoint;
 
 import java.awt.*;
 
 public class Line {
-    private int startX, startY, endX, endY;
+    private MyPoint start, end;
     private final Color color;
     private boolean visible = true;
 
     public Line(int startX, int startY, int endX, int endY, Color color) {
-        this.startX = startX;
-        this.startY = startY;
-        this.endX = endX;
-        this.endY = endY;
+        this.start = new MyPoint(startX, startY);
+        this.end = new MyPoint(endX, endY);
         this.color = color;
         System.out.println("[CREATE] " + this);
     }
 
     public Line(int startX, int startY, int endX, int endY) {
-        this.startX = startX;
-        this.startY = startY;
-        this.endX = endX;
-        this.endY = endY;
+        this.start = new MyPoint(startX, startY);
+        this.end = new MyPoint(endX, endY);
         this.color = Constants.colors[0];
         System.out.println("[CREATE] " + this);
     }
 
     public void moveTo(int dX, int dY) {
-        startX += dX;
-        startY += dY;
-        endY += dY;
-        endX += dX;
+        start.setX(start.getX() + dX);
+        end.setX(end.getX() + dX);
+        
+        start.setY(start.getY() + dY);
+        end.setY(end.getY() + dY);
         System.out.println("[MOVE] " + this);
     }
 
-    public int getStartX() { return startX; }
-    public int getStartY() { return startY; }
-    public int getEndX() { return endX; }
-    public int getEndY() { return endY; }
+
     public Color getColor() { return color; }
     public boolean isVisible() { return visible; }
 
     @Override
     public String toString() {
         return "Line{" +
-                "startX=" + getStartX() +
-                ", startY=" + getStartY() +
-                ", endX=" + getEndX() +
-                ", endY=" + getEndY() +
+                " start=" + start +
+                ", end=" + end +
                 ", color=" + getColor() +
                 ", visible=" + isVisible() +
                 '}';
@@ -63,7 +56,7 @@ public class Line {
         if (!visible) return;
 
         g.setColor(color);
-        g.drawLine(startX, startY, endX, endY);
+        g.drawLine(start.getX(),start.getY(),end.getX(),end.getY());
     }
 
     @Override

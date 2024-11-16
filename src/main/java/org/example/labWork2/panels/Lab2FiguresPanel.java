@@ -1,32 +1,35 @@
-package org.example.labWork1.panels;
+package org.example.labWork2.panels;
 
 import org.example.Utils;
-import org.example.labWork1.FigureFactory;
-import org.example.labWork1.figures.Circle;
-import org.example.labWork1.figures.Line;
-import org.example.labWork1.figures.Rectangle;
-import org.example.labWork1.figures.Triangle;
+import org.example.labWork2.FigureFactory;
+import org.example.labWork2.figures.Circle;
+import org.example.labWork2.figures.Line;
+import org.example.labWork2.figures.Rectangle;
+import org.example.labWork2.figures.Triangle;
+import org.example.labWork2.figures.compositFigures.Ring;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
 
-public class Lab1FiguresPanel extends JPanel {
+public class Lab2FiguresPanel extends JPanel {
 
     private Circle circle;
     private Rectangle rectangle;
     private Line line;
     private Triangle triangle;
+    private Ring ring;
 
     private Circle[] circles;
     private Rectangle[] rectangles;
     private Line[] lines;
     private Triangle[] triangles;
+    private Ring[] rings;
 
     private final FigureFactory figureFactory;
     private final Utils utils = new Utils();
 
-    public Lab1FiguresPanel() {
+    public Lab2FiguresPanel() {
         figureFactory = new FigureFactory();
     }
 
@@ -151,7 +154,6 @@ public class Lab1FiguresPanel extends JPanel {
             }
         }
         repaint();
-
     }
 
     public void changeLine() {
@@ -164,7 +166,7 @@ public class Lab1FiguresPanel extends JPanel {
 
     public void changeLineList() {
         if (lines != null) {
-            for (Line l: lines) {
+            for (Line l : lines) {
                 int r = utils.getRandomInt(-50, 50);
 //                c.changeRadius(r);
             }
@@ -271,7 +273,6 @@ public class Lab1FiguresPanel extends JPanel {
         }
     }
 
-
     public void addOneRectangle() {
         if (rectangle != null) {
             rectangle.erase();
@@ -355,6 +356,83 @@ public class Lab1FiguresPanel extends JPanel {
         rectangles = null;
     }
 
+    public void addOneRing() {
+        if (ring != null) {
+            ring.hide();
+            repaint();
+            ring = null;
+            System.gc();
+        }
+        ring = figureFactory.createRing();
+        repaint();
+    }
+
+    public void addRingList() {
+        if (rings != null) {
+            Arrays.stream(rings).forEach(Ring::hide);
+            repaint();
+            rings = null;
+            System.gc();
+        }
+        rings = figureFactory.createRingList();
+        repaint();
+    }
+
+    public void moveRing() {
+        if (ring != null) {
+            int dX = utils.getRandomInt(-50, 50);
+            int dY = utils.getRandomInt(-50, 50);
+            ring.moveTo(dX, dY);
+        }
+        repaint();
+    }
+
+    public void moveRingList() {
+        if (rings != null) {
+            for (Ring r : rings) {
+                int dX = utils.getRandomInt(-50, 50);
+                int dY = utils.getRandomInt(-50, 50);
+                r.moveTo(dX, dY);
+            }
+        }
+        repaint();
+    }
+
+    public void changeRing() {
+        if (ring != null) {
+            int innerR = utils.getRandomInt(20, 50);
+            int outerR = innerR + utils.getRandomInt(10, 40);
+            ring.changeSize(innerR, outerR);
+        }
+        repaint();
+    }
+
+    public void changeRingList() {
+        if (rings != null) {
+            Arrays.stream(rings).forEach(r -> {
+                int innerR = utils.getRandomInt(20, 50);
+                int outerR = innerR + utils.getRandomInt(10, 40);
+                r.changeSize(innerR, outerR);
+            });
+        }
+        repaint();
+    }
+
+    public void deleteRing() {
+        if (ring != null) {
+            ring.hide();
+            repaint();
+            ring = null;
+        }
+    }
+
+    public void deleteRingList() {
+        Arrays.stream(rings).forEach(Ring::hide);
+        repaint();
+        Arrays.fill(rings, null);
+        rings = null;
+    }
+
     public void clearFrame() {
         if (circle != null) {
             circle.hide();
@@ -401,6 +479,18 @@ public class Lab1FiguresPanel extends JPanel {
             Arrays.fill(rectangles, null);
             rectangles = null;
         }
+        if (ring != null) {
+            ring.hide();
+            repaint();
+            ring = null;
+        }
+        if (rings != null) {
+            Arrays.stream(rings).forEach(Ring::hide);
+            repaint();
+            Arrays.fill(rings, null);
+            rings = null;
+        }
+
         System.gc();
     }
 
@@ -409,18 +499,20 @@ public class Lab1FiguresPanel extends JPanel {
         super.paintComponent(g);
 
         if (circle != null) circle.show(g);
-        if (rectangle != null) rectangle.paint(g);
+        if (rectangle != null) rectangle.show(g);
         if (triangle != null) triangle.show(g);
         if (line != null) line.show(g);
+        if (ring != null) ring.show(g);
 
         if (triangles != null)
             Arrays.stream(triangles).forEach(triangle -> triangle.show(g));
         if (circles != null)
             Arrays.stream(circles).forEach(circle -> circle.show(g));
         if (rectangles != null)
-            Arrays.stream(rectangles).forEach(rectangle -> rectangle.paint(g));
-
+            Arrays.stream(rectangles).forEach(rectangle -> rectangle.show(g));
         if (lines != null)
             Arrays.stream(lines).forEach(line -> line.show(g));
+        if (rings != null)
+            Arrays.stream(rings).forEach(ring -> ring.show(g));
     }
 }

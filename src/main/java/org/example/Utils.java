@@ -20,6 +20,5 @@ public class Utils {
     public Color getRandomColor(){
         return Constants.colors[getRandomInt(Constants.colors.length)];
     }
-
 }
 

@@ -2,6 +2,8 @@ package org.example;
 
 import org.example.labWork1.panels.Lab1ControlPanel;
 import org.example.labWork1.panels.Lab1FiguresPanel;
+import org.example.labWork2.panels.Lab2ControlPanel;
+import org.example.labWork2.panels.Lab2FiguresPanel;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -16,7 +18,11 @@ public class Main {
                 mainFrame = new MainFrame(choice, f, new Lab1ControlPanel(f));
                 mainFrame.setVisible(true);
             }
-            case "2" ->{}
+            case "2" ->{
+                Lab2FiguresPanel panel = new Lab2FiguresPanel();
+                mainFrame = new MainFrame(choice, panel, new Lab2ControlPanel(panel));
+                mainFrame.setVisible(true);
+            }
             case "3" ->{}
             case "4" ->{}
             case "5" ->{}

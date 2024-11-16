@@ -1,10 +1,11 @@
-package org.example.labWork1.figures;
+package org.example.labWork2.figures;
+
+import org.example.labWork2.MyPoint;
 
 import java.awt.*;
 
 public class Rectangle {
-    private int x;
-    private int y;
+    private MyPoint start;
 
     private int width;
     private int high;
@@ -13,22 +14,18 @@ public class Rectangle {
     private boolean visible = true;
 
     public Rectangle(int x, int y, int width, int high, Color color) {
-        this.x = x;
-        this.y = y;
+        this.start = new MyPoint(x,y);
         this.width = width;
         this.high = high;
         this.color = color;
-
         System.out.println("[Create] " + this);
     }
 
     public Rectangle(int x, int y, Color color) {
-        this.x = x;
-        this.y = y;
+        this.start = new MyPoint(x,y);
         this.color = color;
         this.width = 10;
         this.high = 20;
-
         System.out.println("[Create] " + this);
     }
 
@@ -38,8 +35,8 @@ public class Rectangle {
     }
 
     public void moveTo(int dX, int dY){
-        x += dX;
-        y += dY;
+        start.setX(start.getX() + dX);
+        start.setY(start.getY() + dX);
         System.out.println("[MOVE] " + this);
     }
 
@@ -49,17 +46,10 @@ public class Rectangle {
         System.out.println("[CHANGED] " + this);
     }
 
-    public void paint(Graphics graphics){
+    public void show(Graphics graphics){
         if(!visible) return;
         graphics.setColor(color);
-        graphics.drawRect(x, y, width, high);
-    }
-
-    public int getX() {
-        return x;
-    }
-    public int getY() {
-        return y;
+        graphics.drawRect(start.getX(), start.getY(), width, high);
     }
 
     public int getWidth() { return width; }
@@ -70,8 +60,7 @@ public class Rectangle {
     @Override
     public String toString() {
         return "Rectangle{" +
-                "x=" + getX() +
-                ", y=" + getY() +
+                "start=" + start +
                 ", width=" + getWidth() +
                 ", high=" + getHigh() +
                 ", color=" + getColor() +
