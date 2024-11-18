@@ -14,36 +14,37 @@ public class Main {
     public static void main(String[] args) {
         String choice = getChoice();
         MainFrame mainFrame;
-        switch (choice){
-            case "1" ->{
+        switch (choice) {
+            case "1" -> {
                 Lab1FiguresPanel f = new Lab1FiguresPanel();
                 mainFrame = new MainFrame(choice, f, new Lab1ControlPanel(f));
                 mainFrame.setVisible(true);
             }
-            case "2" ->{
+            case "2" -> {
                 Lab2FiguresPanel panel = new Lab2FiguresPanel();
                 mainFrame = new MainFrame(choice, panel, new Lab2ControlPanel(panel));
                 mainFrame.setVisible(true);
             }
-            case "3" ->{
+            case "3" -> {
                 Lab3FiguresPanel panel = new Lab3FiguresPanel();
                 mainFrame = new MainFrame(choice, panel, new Lab3ControlPanel(panel));
                 mainFrame.setVisible(true);
             }
-            case "4" ->{}
-            case "5" ->{}
-            case "6" ->{}
-            case "7" ->{}
-            case "8" ->{}
+            case "4" -> {
+            }
+            case "5" -> {
+            }
+            case "6" -> {
+            }
         }
     }
 
-    public static boolean isValidInput(String s) {
-        Pattern pattern = Pattern.compile("^[0-7]$");
+    private static boolean isValidInput(String s) {
+        Pattern pattern = Pattern.compile("^[0-5]|^6-[1-2]$");
         return pattern.matcher(s).find();
     }
 
-    public static String getChoice() {
+    private static String getChoice() {
         Scanner scanner = new Scanner(System.in);
         String choice = "";
         while (!isValidInput(choice)) {
