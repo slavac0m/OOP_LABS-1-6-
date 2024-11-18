@@ -1,7 +1,6 @@
 package org.example.labWork3.panels;
 
 import org.example.Utils;
-import org.example.labWork2.figures.compositFigures.Ring;
 import org.example.labWork3.CreateFigures;
 import org.example.labWork3.figures.secLayer.Circle;
 import org.example.labWork3.figures.secLayer.Quadrangle;
@@ -82,7 +81,7 @@ public class Lab3FiguresPanel extends JPanel {
     public void changeCircle() {
         if (circle != null) {
             int r = utils.getRandomInt(20, 100);
-//            circle.(r);
+            circle.setR(r);
         }
         repaint();
     }
@@ -91,7 +90,7 @@ public class Lab3FiguresPanel extends JPanel {
         if (circles != null) {
             for (Circle c : circles) {
                 int r = utils.getRandomInt(-50, 50);
-//                c.setRadius(r);
+                c.setR(r);
             }
         }
         repaint();
@@ -159,18 +158,14 @@ public class Lab3FiguresPanel extends JPanel {
 
     public void changeEllipse() {
         if (ellipse != null) {
-            int r = utils.getRandomInt(20, 100);
-//            circle.(r);
+            ellipse.rotate();
         }
         repaint();
     }
 
     public void changeEllipseList() {
         if (ellipses != null) {
-            for (Ellipse e : ellipses) {
-                int r = utils.getRandomInt(-50, 50);
-//                c.setRadius(r);
-            }
+            for (Ellipse e : ellipses) e.rotate();
         }
         repaint();
     }
@@ -201,7 +196,6 @@ public class Lab3FiguresPanel extends JPanel {
         }
         rectangle = createFigures.createRandomRectangle();
         repaint();
-
     }
 
     public void addRectangleList() {
@@ -240,9 +234,7 @@ public class Lab3FiguresPanel extends JPanel {
 
     public void changeRectangle() {
         if (rectangle != null) {
-            int diffWidth = utils.getRandomInt(20, 100);
-            int diffHeight = utils.getRandomInt(20, 100);
-//            rectangle.changeForm(diffWidth, diffHeight);
+            rectangle.rotate();
         }
         repaint();
     }
@@ -316,22 +308,12 @@ public class Lab3FiguresPanel extends JPanel {
     }
 
     public void changeRhombus() {
-        if (rhombus != null) {
-            int diffWidth = utils.getRandomInt(20, 100);
-            int diffHeight = utils.getRandomInt(20, 100);
-//            rectangle.changeForm(diffWidth, diffHeight);
-        }
+        if (rhombus != null) rhombus.rotate();
         repaint();
     }
 
     public void changeRhombusList() {
-        if (rhombuses != null) {
-            Arrays.stream(rhombuses).forEach(e -> {
-                int diffWidth = utils.getRandomInt(20, 100);
-                int diffHeight = utils.getRandomInt(20, 100);
-//                e.changeForm(diffWidth, diffHeight);
-            });
-        }
+        if (rhombuses != null) Arrays.stream(rhombuses).forEach(Rhombus::rotate);
         repaint();
     }
 
@@ -394,22 +376,12 @@ public class Lab3FiguresPanel extends JPanel {
     }
 
     public void changeQuadrangle() {
-        if (quadrangle != null) {
-            int diffWidth = utils.getRandomInt(20, 100);
-            int diffHeight = utils.getRandomInt(20, 100);
-//            rectangle.changeForm(diffWidth, diffHeight);
-        }
+        if (quadrangle != null) quadrangle.rotate();
         repaint();
     }
 
     public void changeQuadrangleList() {
-        if (quadrangles != null) {
-            Arrays.stream(quadrangles).forEach(e -> {
-                int diffWidth = utils.getRandomInt(20, 100);
-                int diffHeight = utils.getRandomInt(20, 100);
-//                e.changeForm(diffWidth, diffHeight);
-            });
-        }
+        if (quadrangles != null) Arrays.stream(quadrangles).forEach(Quadrangle::rotate);
         repaint();
     }
 
@@ -471,22 +443,12 @@ public class Lab3FiguresPanel extends JPanel {
     }
 
     public void changeTrapezoid() {
-        if (trapezoid != null) {
-            int diffWidth = utils.getRandomInt(20, 100);
-            int diffHeight = utils.getRandomInt(20, 100);
-//            rectangle.changeForm(diffWidth, diffHeight);
-        }
+        if (trapezoid != null) trapezoid.rotate();
         repaint();
     }
 
     public void changeTrapezoidList() {
-        if (trapezoids != null) {
-            Arrays.stream(trapezoids).forEach(e -> {
-                int diffWidth = utils.getRandomInt(20, 100);
-                int diffHeight = utils.getRandomInt(20, 100);
-//                e.changeForm(diffWidth, diffHeight);
-            });
-        }
+        if (trapezoids != null) Arrays.stream(trapezoids).forEach(Trapezoid::rotate);
         repaint();
     }
 

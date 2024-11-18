@@ -82,8 +82,8 @@ public class CreateFigures {
     public Rhombus createRandomRhombus() {
         MyPoint center = utils.getRandomPoint();
         Color color = utils.getRandomColor();
-        int diagonal1 = utils.getRandomInt(30, 60);
-        int diagonal2 = utils.getRandomInt(50, 80);
+        int diagonal1 = utils.getRandomInt(20, 60);
+        int diagonal2 = utils.getRandomInt(60, 130);
         return new Rhombus(center, diagonal1, diagonal2, color);
     }
 

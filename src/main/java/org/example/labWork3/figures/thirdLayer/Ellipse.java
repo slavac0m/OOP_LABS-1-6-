@@ -23,14 +23,13 @@ public class Ellipse extends Circle {
 
     public void rotate() {
         int t = smallAxis;
-        smallAxis = getR();
+        smallAxis = largeAxis;
         largeAxis = t;
     }
 
     @Override
     public void paint(Graphics g) {
         if (!isVisible()) return;
-        ;
         g.setColor(getColor());
         g.fillOval(getPoint().getX(), getPoint().getY(), smallAxis * 2, largeAxis * 2);
         g.setColor(Color.BLACK);

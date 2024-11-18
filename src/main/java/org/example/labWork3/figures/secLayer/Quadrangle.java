@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class Quadrangle extends TFigure {
-
     private MyPoint[] points;
 
     public Quadrangle(MyPoint[] points, Color color) {
@@ -35,6 +34,18 @@ public class Quadrangle extends TFigure {
         g.setColor(Color.BLACK);
         g.drawPolygon(xPoints, yPoints, 4);
     }
+
+    public void rotate() {
+        MyPoint center = getPoints()[0];
+        for (MyPoint point : points) {
+            int newX = center.getX() + (point.getY() - center.getY());
+            int newY = center.getY() - (point.getX() - center.getX());
+            point.setX(newX);
+            point.setY(newY);
+        }
+        System.out.println("[ROTATE] " + this);
+    }
+
 
     public MyPoint[] getPoints() {
         return points;
@@ -63,7 +74,6 @@ public class Quadrangle extends TFigure {
 
     @Override
     public void moveTo(int dX, int dY) {
-        super.moveTo(dX, dY);
         for (int i =0; i < 4; i++)points[i].moveTo(dX, dY);
     }
 

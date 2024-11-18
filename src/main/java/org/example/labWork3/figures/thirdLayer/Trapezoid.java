@@ -18,6 +18,19 @@ public class Trapezoid extends Quadrangle {
         System.out.println("[CREATE] " + this);
     }
 
+    public void rotate() {
+        MyPoint topLeft = getPoints()[0];
+
+        for (int i = 1; i < getPoints().length; i++) {
+            MyPoint point = getPoints()[i];
+            int newX = topLeft.getX() + (point.getY() - topLeft.getY());
+            int newY = topLeft.getY() - (point.getX() - topLeft.getX());
+            point.setX(newX);
+            point.setY(newY);
+        }
+        System.out.println("[ROTATE] " + this);
+    }
+
     @Override
     public String toString() {
         return "Trapezoid={" +

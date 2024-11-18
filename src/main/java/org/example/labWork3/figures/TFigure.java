@@ -1,5 +1,6 @@
 package org.example.labWork3.figures;
 
+
 import org.example.MyPoint;
 
 import java.awt.*;
@@ -15,14 +16,14 @@ public abstract class TFigure {
         this.color = color;
     }
 
-    public void erase() {
-        this.visible = false;
-    }
     public abstract void paint(Graphics g);
-    public void moveTo(int dX, int dY){
-        point.setX(point.getX() + dX);
-        point.setY(point.getY() + dY);
-    }
+
+    public void erase(){
+        setVisible(false);
+    };
+
+    public abstract void moveTo(int dX, int dY);
+
 
     public Color getColor() {
         return color;
@@ -54,15 +55,5 @@ public abstract class TFigure {
     protected void finalize() throws Throwable{
         point = null;
         System.gc();
-    }
-
-    @Override
-    public String toString() {
-        return "TFigure{" +
-                "point=" + point +
-                ", graphics=" + graphics +
-                ", color=" + color +
-                ", visible=" + visible +
-                '}';
     }
 }

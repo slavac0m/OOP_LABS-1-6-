@@ -45,11 +45,22 @@ public class Circle extends TFigure {
         );
     }
 
+    @Override
+    public void moveTo(int dX, int dY) {
+        getPoint().moveTo(dX,dY);
+    }
+
+
     public int getR() {
         return r;
     }
     public void setR(int r) {
         this.r = r;
+    }
+
+    public void erase(){
+        setVisible(false);
+        System.out.println("[ERASE] "+ this);
     }
 
     @Override
