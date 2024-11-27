@@ -1,7 +1,7 @@
-package org.example.labWork3.figures.thirdLayer;
+package org.example.labWork4.figures.thirdLayer;
 
 import org.example.MyPoint;
-import org.example.labWork3.figures.secLayer.Circle;
+import org.example.labWork4.figures.secLayer.Circle;
 
 import java.awt.*;
 
@@ -24,10 +24,11 @@ public class Ellipse extends Circle {
     @Override
     public void paint(Graphics g) {
         if (!isVisible()) return;
+        setGraphics(g);
         g.setColor(getColor());
-        g.fillOval(getPoint().getX(), getPoint().getY(), smallAxis * 2, largeAxis * 2);
+        g.fillOval(getPoints()[0].getX(), getPoints()[0].getY(), smallAxis * 2, largeAxis * 2);
         g.setColor(Color.BLACK);
-        g.drawOval(getPoint().getX(), getPoint().getY(), smallAxis * 2, largeAxis * 2);
+        g.drawOval(getPoints()[0].getX(), getPoints()[0].getY(), smallAxis * 2, largeAxis * 2);
     }
 
     public int getLargeAxis() {
@@ -52,7 +53,7 @@ public class Ellipse extends Circle {
         return "Ellipse{" +
                 "smallAxis=" + smallAxis +
                 ", largeAxis=" + largeAxis +
-                ", center=" + getPoint() +
+                ", center=" + getPoints()[0] +
                 '}';
     }
 

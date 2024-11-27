@@ -6,14 +6,18 @@ import org.example.labWork2.panels.Lab2ControlPanel;
 import org.example.labWork2.panels.Lab2FiguresPanel;
 import org.example.labWork3.panels.Lab3ControlPanel;
 import org.example.labWork3.panels.Lab3FiguresPanel;
+import org.example.labWork4.panels.Lab4ControlPanel;
+import org.example.labWork4.panels.Lab4FiguresPanel;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
-        String choice = getChoice();
+//        String choice = getChoice();
+        String choice = "4";
         MainFrame mainFrame;
+
         switch (choice) {
             case "1" -> {
                 Lab1FiguresPanel f = new Lab1FiguresPanel();
@@ -31,6 +35,9 @@ public class Main {
                 mainFrame.setVisible(true);
             }
             case "4" -> {
+                Lab4FiguresPanel panel = new Lab4FiguresPanel();
+                mainFrame = new MainFrame(choice, panel, new Lab4ControlPanel(panel));
+                mainFrame.setVisible(true);
             }
             case "5" -> {
             }
