@@ -1,10 +1,8 @@
 package org.example.labWork4.panels;
 
-import org.example.Constants;
 import org.example.Constants.FigureType;
 
 import javax.swing.*;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Lab4ControlPanel extends JPanel {

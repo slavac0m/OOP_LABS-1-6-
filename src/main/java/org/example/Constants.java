@@ -18,7 +18,8 @@ public class Constants {
         QUADRANGLE("QUADRANGLE", 2),
         RECTANGLE("RECTANGLE", 3),
         RHOMBUS("RHOMBUS", 4),
-        TRAPEZOID("TRAPEZOID", 5);
+        TRAPEZOID("TRAPEZOID", 5),
+        ALL("ALl", 5);
 
         private final String name;
         private final int index;
