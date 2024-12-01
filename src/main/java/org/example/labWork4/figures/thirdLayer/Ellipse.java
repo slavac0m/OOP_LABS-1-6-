@@ -6,19 +6,19 @@ import org.example.labWork4.figures.secLayer.Circle;
 import java.awt.*;
 
 public class Ellipse extends Circle {
-    private int smallAxis;
     private int largeAxis;
 
     public Ellipse(MyPoint point, int smallAxis, int largeAxis, Color color) {
-        super(point, 0, color);
-        this.smallAxis = smallAxis;
+        super(point, color, smallAxis);
         this.largeAxis = largeAxis;
     }
 
     public void rotate() {
-        int t = smallAxis;
-        smallAxis = largeAxis;
+        int t = getSmallAxis();
+        setSmallAxis(largeAxis);
         largeAxis = t;
+
+        System.out.println("[ROTATE] " + this);
     }
 
     @Override
@@ -26,9 +26,19 @@ public class Ellipse extends Circle {
         if (!isVisible()) return;
         setGraphics(g);
         g.setColor(getColor());
-        g.fillOval(getPoints()[0].getX(), getPoints()[0].getY(), smallAxis * 2, largeAxis * 2);
+        g.fillOval(
+                getCenter().getX() - getSmallAxis(),
+                getCenter().getY() - getLargeAxis(),
+                getSmallAxis() * 2,
+                largeAxis * 2
+        );
         g.setColor(Color.BLACK);
-        g.drawOval(getPoints()[0].getX(), getPoints()[0].getY(), smallAxis * 2, largeAxis * 2);
+        g.drawOval(
+                getCenter().getX() - getSmallAxis(),
+                getCenter().getY() - getLargeAxis(),
+                getSmallAxis() * 2,
+                largeAxis * 2
+        );
     }
 
     public int getLargeAxis() {
@@ -40,25 +50,26 @@ public class Ellipse extends Circle {
     }
 
     public int getSmallAxis() {
-        return smallAxis;
+        return getR();
     }
 
     public void setSmallAxis(int smallAxis) {
-        this.smallAxis = smallAxis;
+        setR(smallAxis);
     }
 
 
     @Override
     public String toString() {
         return "Ellipse{" +
-                "smallAxis=" + smallAxis +
+                "smallAxis=" + getSmallAxis() +
                 ", largeAxis=" + largeAxis +
-                ", center=" + getPoints()[0] +
+                ", center=" + getCenter() +
                 '}';
     }
 
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
+        System.out.println("[DELETE] " + this);
     }
 }

@@ -9,7 +9,7 @@ public class Lab4ControlPanel extends JPanel {
 
     public Lab4ControlPanel(Lab4FiguresPanel lab4FiguresPanel) {
         JCheckBox arrayMode = new JCheckBox("Режим работы с массивами");
-        JComboBox<String> figureType = new JComboBox<>(FigureType.getNames());
+        JComboBox<String> figureType = new JComboBox<>(new String[]{"CIRCLE", "ELLIPSE","QUADRANGLE","RECTANGLE","RHOMBUS","TRAPEZOID"});
 
         JButton moveButton = createMoveButton(lab4FiguresPanel, arrayMode, figureType);
         JButton createFigureButton = buildCreateButton(lab4FiguresPanel, arrayMode, figureType);

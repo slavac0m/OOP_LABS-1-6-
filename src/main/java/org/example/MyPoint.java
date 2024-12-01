@@ -1,11 +1,15 @@
 package org.example;
 
 public class MyPoint {
-    private int x,y;
+    private int x, y;
+
 
     public MyPoint(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public MyPoint() {
     }
 
     public int getX() {
@@ -24,7 +28,7 @@ public class MyPoint {
         this.y = y;
     }
 
-    public void moveTo(int dX, int dY){
+    public void moveTo(int dX, int dY) {
         x += dX;
         y += dY;
     }

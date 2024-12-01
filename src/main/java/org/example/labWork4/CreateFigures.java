@@ -28,7 +28,7 @@ public class CreateFigures {
         int y = utils.getRandomInt(frameHeight);
         int r = utils.getRandomInt(20, 55);
         Color color = utils.getRandomColor();
-        return new Circle(new MyPoint(x, y), r, color);
+        return new Circle(new MyPoint(x, y), color, r);
     }
 
     public Circle[] createRandomCircleList() {

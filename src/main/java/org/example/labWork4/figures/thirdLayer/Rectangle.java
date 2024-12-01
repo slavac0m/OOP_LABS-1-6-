@@ -20,25 +20,27 @@ public class Rectangle extends Quadrangle {
                 color);
         System.out.println("[CREATE] " + this);
     }
+    public int getWidth() {
+        MyPoint[] points = getPoints();
+        return Math.abs(points[1].getX() - points[0].getX());
+    }
 
-    public void rotate(){
-        MyPoint topLeft = getPoints()[0];
-        for (int i = 1; i < getPoints().length; i++) {
-            MyPoint point = getPoints()[i];
-            int newX = topLeft.getX() + (point.getY() - topLeft.getY());
-            int newY = topLeft.getY() - (point.getX() - topLeft.getX());
-            point.setX(newX);
-            point.setY(newY);
-        }
-        System.out.println("[ROTATE] " + this);
+    public int getHeight() {
+        MyPoint[] points = getPoints();
+        return Math.abs(points[2].getY() - points[1].getY());
     }
 
     @Override
     public String toString() {
-        return "Rectangle={" +
-                "points=" + Arrays.toString(getPoints()) +
-                "}";
+        return "Rectangle{" +
+                "width=" + getWidth() +
+                ", height=" + getHeight() +
+                ", center=" + getCenter() +
+                ", color=" + getColor() +
+                '}';
     }
+
+
 
     @Override
     protected void finalize() throws Throwable {

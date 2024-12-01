@@ -19,7 +19,7 @@ public class Constants {
         RECTANGLE("RECTANGLE", 3),
         RHOMBUS("RHOMBUS", 4),
         TRAPEZOID("TRAPEZOID", 5),
-        ALL("ALl", 5);
+        ALL("ALL", 5);
 
         private final String name;
         private final int index;
@@ -36,4 +36,6 @@ public class Constants {
                     .toArray(String[]::new);
         }
     }
+
+
 }
