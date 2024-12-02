@@ -1,7 +1,7 @@
-package org.example.labWork6_array.figures.thirdLayer;
+package org.example.labWork6.figures.thirdLayer;
 
 import org.example.MyPoint;
-import org.example.labWork6_array.figures.secLayer.Quadrangle;
+import org.example.labWork6.figures.secLayer.Quadrangle;
 
 import java.awt.*;
 import java.util.Arrays;

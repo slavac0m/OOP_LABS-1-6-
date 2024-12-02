@@ -1,31 +1,32 @@
-package org.example.labWork6_linked.panels;
+package org.example.labWork6.labWork6_array.panels;
 
 import org.example.Constants;
 import org.example.Constants.FigureType;
 import org.example.MyPoint;
 import org.example.Utils;
-import org.example.labWork6_linked.CreateFigures;
-import org.example.labWork6_linked.figures.TFigure;
-import org.example.labWork6_linked.figures.secLayer.Circle;
-import org.example.labWork6_linked.figures.secLayer.Quadrangle;
-import org.example.labWork6_linked.figures.thirdLayer.Ellipse;
-import org.example.labWork6_linked.figures.thirdLayer.Rectangle;
-import org.example.labWork6_linked.figures.thirdLayer.Rhombus;
-import org.example.labWork6_linked.figures.thirdLayer.Trapezoid;
+import org.example.labWork6.labWork6_array.CreateFigures;
+import org.example.labWork6.labWork6_array.MyArrayList;
+import org.example.labWork6.figures.TFigure;
+import org.example.labWork6.figures.secLayer.Circle;
+import org.example.labWork6.figures.secLayer.Quadrangle;
+import org.example.labWork6.figures.thirdLayer.Ellipse;
+import org.example.labWork6.figures.thirdLayer.Rectangle;
+import org.example.labWork6.figures.thirdLayer.Rhombus;
+import org.example.labWork6.figures.thirdLayer.Trapezoid;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
-public class Lab5FiguresPanel extends JPanel {
+public class Lab6ArrayFiguresPanel extends JPanel {
 
-    private ArrayList<TFigure> figures = new ArrayList<>();
-
+    private MyArrayList figures;
     private final CreateFigures createFigures;
-    private final Utils utils = new Utils();
+    private final Utils utils;
 
-    public Lab5FiguresPanel() {
+    public Lab6ArrayFiguresPanel() {
+        figures = new MyArrayList();
         createFigures = new CreateFigures();
+        utils = new Utils();
     }
 
     public void createFiguresList(FigureType type) {
@@ -34,12 +35,12 @@ public class Lab5FiguresPanel extends JPanel {
     }
 
     public void changeFiguresVisible(FigureType type) {
-        figures.stream().filter(e -> checking(type, e)).forEach(figure -> figure.setVisible(!figure.isVisible()));
+        figures.filter(e -> checking(type, e)).forEach(figure -> figure.setVisible(!figure.isVisible()));
         repaint();
     }
 
     public void moveFigures(FigureType type) {
-        figures.stream().filter(e -> checking(type, e)).forEach(figure ->
+        figures.filter(e -> checking(type, e)).forEach(figure ->
                 figure.moveTo(
                         utils.getRandomInt(-50, 50),
                         utils.getRandomInt(-50, 50)
@@ -50,12 +51,12 @@ public class Lab5FiguresPanel extends JPanel {
 
     public void moveToObePoint(FigureType type) {
         MyPoint frameCenter = new MyPoint(Constants.FRAME_WIDTH / 2, Constants.FRAME_HIGH / 2);
-        figures.stream().filter(e -> checking(type, e)).forEach(f -> f.setCenter(frameCenter));
+        figures.filter(e -> checking(type, e)).forEach(f -> f.setCenter(frameCenter));
         repaint();
     }
 
     public void moveFigures(FigureType type, int diffX, int diffY) {
-        figures.stream().filter(e -> checking(type, e)).forEach(figure -> {
+        figures.filter(e -> checking(type, e)).forEach(figure -> {
             figure.moveTo(diffX, diffY);
         });
         System.out.println("move");
@@ -63,7 +64,7 @@ public class Lab5FiguresPanel extends JPanel {
     }
 
     public void resizeFigures(FigureType type) {
-        figures.stream().filter(e -> checking(type, e)).forEach(e -> {
+        figures.filter(e -> checking(type, e)).forEach(e -> {
             switch (type) {
                 case CIRCLE:
                     ((Circle) e).setR(utils.getRandomInt(20, 100));
@@ -88,7 +89,8 @@ public class Lab5FiguresPanel extends JPanel {
                         ((Quadrangle) e).scale((double) utils.getRandomInt(60, 130) / 100);
                     }
                     break;
-                default: throw new IllegalStateException("Unexpected value: " + type);
+                default:
+                    throw new IllegalStateException("Unexpected value: " + type);
             }
         });
         repaint();
@@ -119,10 +121,11 @@ public class Lab5FiguresPanel extends JPanel {
         };
     }
 
-    public void rotateEllipse(){
-        figures.stream().filter(e-> checking(FigureType.ELLIPSE, e)).forEach(figure -> ((Ellipse) figure).rotate());
+    public void rotateEllipse() {
+        figures.filter(e -> checking(FigureType.ELLIPSE, e)).forEach(figure -> ((Ellipse) figure).rotate());
         repaint();
     }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

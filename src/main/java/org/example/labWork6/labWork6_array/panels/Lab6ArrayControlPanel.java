@@ -1,30 +1,30 @@
-package org.example.labWork6_linked.panels;
+package org.example.labWork6.labWork6_array.panels;
 
 import org.example.Constants.FigureType;
+import org.example.labWork6.labWork6_array.MyButton;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Objects;
 
-public class Lab5ControlPanel extends JPanel {
+public class Lab6ArrayControlPanel extends JPanel {
     JComboBox<String> figureType = new JComboBox<>(FigureType.getNames());
 
-    public Lab5ControlPanel(Lab5FiguresPanel lab5FiguresPanel) {
+    public Lab6ArrayControlPanel(Lab6ArrayFiguresPanel lab6ArrayFiguresPanel) {
+        figureType.addActionListener(e -> this.requestFocus());
 
-        JButton createFigureButton = buildCreateButton(lab5FiguresPanel);
-        JButton moveButton = buildMoveButton(lab5FiguresPanel);
+        MyButton createFigureButton = buildCreateButton(lab6ArrayFiguresPanel);
+        MyButton moveButton = buildMoveButton(lab6ArrayFiguresPanel);
 
-        JButton visibleChangeButton = buildVisibleChangeButton(lab5FiguresPanel);
-        JButton resizeButton = buildResizeButton(lab5FiguresPanel);
-        JButton rotateEllipseButton = buildRotateEllipse(lab5FiguresPanel);
+        MyButton visibleChangeButton = buildVisibleChangeButton(lab6ArrayFiguresPanel);
+        MyButton resizeButton = buildResizeButton(lab6ArrayFiguresPanel);
+        MyButton rotateEllipseButton = buildRotateEllipse(lab6ArrayFiguresPanel);
 
-
-        JButton deleteFigureButton = buildDeleteFigures(lab5FiguresPanel);
+        MyButton deleteFigureButton = buildDeleteFigures(lab6ArrayFiguresPanel);
 
         JButton moveToOnePoint = new JButton("Переместить в одну точку");
-        moveToOnePoint.addActionListener(e -> lab5FiguresPanel.moveToObePoint(getFiguresTypesSelectedItem()));
-
+        moveToOnePoint.addActionListener(e -> lab6ArrayFiguresPanel.moveToObePoint(getFiguresTypesSelectedItem()));
 
         add(figureType);
         add(visibleChangeButton);
@@ -45,45 +45,45 @@ public class Lab5ControlPanel extends JPanel {
                     case KeyEvent.VK_LEFT -> diffX = -10;
                     case KeyEvent.VK_RIGHT -> diffX = 10;
                 }
-                lab5FiguresPanel.moveFigures(getFiguresTypesSelectedItem(), diffX, diffY);
+                lab6ArrayFiguresPanel.moveFigures(getFiguresTypesSelectedItem(), diffX, diffY);
             }
         });
     }
 
-    private JButton buildMoveButton(Lab5FiguresPanel figuresPanel) {
-        JButton moveFigureButton = new JButton("Переместить");
+    private MyButton buildMoveButton(Lab6ArrayFiguresPanel figuresPanel) {
+        MyButton moveFigureButton = new MyButton("Переместить", this);
         moveFigureButton.addActionListener(e -> figuresPanel.moveFigures(getFiguresTypesSelectedItem()));
         return moveFigureButton;
     }
 
-    private JButton buildVisibleChangeButton(Lab5FiguresPanel figuresPanel) {
-        JButton visibleChangeButton = new JButton("Изменить видимость");
+    private MyButton buildVisibleChangeButton(Lab6ArrayFiguresPanel figuresPanel) {
+        MyButton visibleChangeButton = new MyButton("Изменить видимость", this);
         visibleChangeButton.addActionListener(e -> figuresPanel.changeFiguresVisible(getFiguresTypesSelectedItem()));
         return visibleChangeButton;
     }
 
-    private JButton buildCreateButton(Lab5FiguresPanel figuresPanel) {
-        JButton createFigureButton = new JButton("Создать");
+    private MyButton buildCreateButton(Lab6ArrayFiguresPanel figuresPanel) {
+        MyButton createFigureButton = new MyButton("Создать", this);
         createFigureButton.addActionListener(e -> figuresPanel.createFiguresList(getFiguresTypesSelectedItem()));
         return createFigureButton;
     }
 
-    private JButton buildResizeButton(Lab5FiguresPanel figuresPanel) {
-        JButton resizeButton = new JButton("Изменить размер");
+    private MyButton buildResizeButton(Lab6ArrayFiguresPanel figuresPanel) {
+        MyButton resizeButton = new MyButton("Изменить размер", this);
         resizeButton.addActionListener(e -> figuresPanel.resizeFigures(getFiguresTypesSelectedItem()));
         return resizeButton;
     }
 
-    private JButton buildRotateEllipse(Lab5FiguresPanel figuresPanel) {
-        JButton rotateEllipse = new JButton("Повернуть эллипс");
+    private MyButton buildRotateEllipse(Lab6ArrayFiguresPanel figuresPanel) {
+        MyButton rotateEllipse = new MyButton("Повернуть эллипс", this);
 
         rotateEllipse.addActionListener(e -> figuresPanel.rotateEllipse());
 
         return rotateEllipse;
     }
 
-    private JButton buildDeleteFigures(Lab5FiguresPanel figuresPanel) {
-        JButton deleteButton = new JButton("Удалить");
+    private MyButton buildDeleteFigures(Lab6ArrayFiguresPanel figuresPanel) {
+        MyButton deleteButton = new MyButton("Удалить", this);
         deleteButton.addActionListener(e -> figuresPanel.deleteFigures(getFiguresTypesSelectedItem()));
         return deleteButton;
     }

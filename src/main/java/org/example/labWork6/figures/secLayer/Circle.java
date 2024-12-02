@@ -1,7 +1,7 @@
-package org.example.labWork6_array.figures.secLayer;
+package org.example.labWork6.figures.secLayer;
 
 import org.example.MyPoint;
-import org.example.labWork6_array.figures.TFigure;
+import org.example.labWork6.figures.TFigure;
 
 import java.awt.*;
 

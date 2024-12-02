@@ -1,19 +1,17 @@
-package org.example.labWork6_linked;
+package org.example.labWork6.labWork6_linked;
 
 import org.example.Constants;
 import org.example.Constants.FigureType;
 import org.example.MyPoint;
 import org.example.Utils;
-import org.example.labWork6_linked.figures.TFigure;
-import org.example.labWork6_linked.figures.secLayer.Circle;
-import org.example.labWork6_linked.figures.secLayer.Quadrangle;
-import org.example.labWork6_linked.figures.thirdLayer.Ellipse;
-import org.example.labWork6_linked.figures.thirdLayer.Rectangle;
-import org.example.labWork6_linked.figures.thirdLayer.Rhombus;
-import org.example.labWork6_linked.figures.thirdLayer.Trapezoid;
+import org.example.labWork6.figures.secLayer.Circle;
+import org.example.labWork6.figures.secLayer.Quadrangle;
+import org.example.labWork6.figures.thirdLayer.Ellipse;
+import org.example.labWork6.figures.thirdLayer.Rectangle;
+import org.example.labWork6.figures.thirdLayer.Rhombus;
+import org.example.labWork6.figures.thirdLayer.Trapezoid;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class CreateFigures {
     Utils utils = new Utils();
@@ -26,10 +24,10 @@ public class CreateFigures {
         this.frameHeight = Constants.FRAME_HIGH;
     }
 
-    public ArrayList<TFigure> getNewRandomFigures(FigureType type) {
-        ArrayList<TFigure> figures = new ArrayList<>();
+    public MyLinkedList getNewRandomFigures(FigureType type) {
+        MyLinkedList figures = new MyLinkedList();
         switch (type) {
-            case ALL ->{
+            case ALL -> {
                 figures.addAll(createRandomCircleList(utils.getRandomInt(4, 13)));
                 figures.addAll(createRandomEllipseList(utils.getRandomInt(4, 13)));
                 figures.addAll(createRandomQuadrangleList(utils.getRandomInt(4, 13)));
@@ -54,12 +52,12 @@ public class CreateFigures {
         int y = utils.getRandomInt(frameHeight);
         int r = utils.getRandomInt(20, 55);
         Color color = utils.getRandomColor();
-        return new Circle(new MyPoint(x, y), color,r);
+        return new Circle(new MyPoint(x, y), color, r);
     }
 
-    public ArrayList<Circle> createRandomCircleList(int count) {
-        ArrayList<Circle> circles = new ArrayList<>();
-        for (int i = 0; i < count; i++)circles.add(createRandomCircle());
+    public MyLinkedList createRandomCircleList(int count) {
+        MyLinkedList circles = new MyLinkedList();
+        for (int i = 0; i < count; i++) circles.add(createRandomCircle());
         return circles;
     }
 
@@ -72,8 +70,8 @@ public class CreateFigures {
         return new Ellipse(new MyPoint(x, y), r, axis, color);
     }
 
-    public ArrayList<Ellipse> createRandomEllipseList(int count) {
-        ArrayList<Ellipse> ellipses = new ArrayList<>();
+    public MyLinkedList createRandomEllipseList(int count) {
+        MyLinkedList ellipses = new MyLinkedList();
         for (int i = 0; i < count; i++) ellipses.add(createRandomEllipse());
         return ellipses;
     }
@@ -85,8 +83,8 @@ public class CreateFigures {
         return new Quadrangle(points, color);
     }
 
-    public ArrayList<Quadrangle> createRandomQuadrangleList(int count) {
-        ArrayList<Quadrangle> quadrangles = new ArrayList<>();
+    public MyLinkedList createRandomQuadrangleList(int count) {
+        MyLinkedList quadrangles = new MyLinkedList();
         for (int i = 0; i < count; i++) quadrangles.add(createRandomQuadrangle());
         return quadrangles;
     }
@@ -99,8 +97,8 @@ public class CreateFigures {
         return new Rectangle(point, width, high, color);
     }
 
-    public ArrayList<Rectangle> createRandomRectangleList(int count) {
-        ArrayList<Rectangle> rectangles = new ArrayList<>();
+    public MyLinkedList createRandomRectangleList(int count) {
+       MyLinkedList rectangles = new MyLinkedList();
         for (int i = 0; i < count; i++) rectangles.add(createRandomRectangle());
         return rectangles;
     }
@@ -113,8 +111,8 @@ public class CreateFigures {
         return new Rhombus(center, diagonal1, diagonal2, color);
     }
 
-    public ArrayList<Rhombus> createRandomRhombusList(int count) {
-        ArrayList<Rhombus> rhombuses = new ArrayList<>();
+    public MyLinkedList createRandomRhombusList(int count) {
+        MyLinkedList rhombuses = new MyLinkedList();
         for (int i = 0; i < count; i++) rhombuses.add(createRandomRhombus());
         return rhombuses;
     }
@@ -128,8 +126,8 @@ public class CreateFigures {
         return new Trapezoid(topLeft, topWidth, bottomWidth, height, color);
     }
 
-    public ArrayList<Trapezoid> createRandomTrapezoidList(int count) {
-        ArrayList<Trapezoid> trapezoids = new ArrayList<>();
+    public MyLinkedList createRandomTrapezoidList(int count) {
+        MyLinkedList trapezoids = new MyLinkedList();
         for (int i = 0; i < count; i++) trapezoids.add(createRandomTrapezoid());
         return trapezoids;
     }

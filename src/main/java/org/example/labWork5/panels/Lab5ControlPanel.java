@@ -11,18 +11,19 @@ public class Lab5ControlPanel extends JPanel {
     JComboBox<String> figureType = new JComboBox<>(FigureType.getNames());
 
     public Lab5ControlPanel(Lab5FiguresPanel lab5FiguresPanel) {
+        figureType.addActionListener(e -> this.requestFocus());
 
-        JButton createFigureButton = buildCreateButton(lab5FiguresPanel);
-        JButton moveButton = buildMoveButton(lab5FiguresPanel);
+        MyButton createFigureButton = buildCreateButton(lab5FiguresPanel);
+        MyButton moveButton = buildMoveButton(lab5FiguresPanel);
 
-        JButton visibleChangeButton = buildVisibleChangeButton(lab5FiguresPanel);
-        JButton resizeButton = buildResizeButton(lab5FiguresPanel);
-        JButton rotateEllipseButton = buildRotateEllipse(lab5FiguresPanel);
+        MyButton visibleChangeButton = buildVisibleChangeButton(lab5FiguresPanel);
+        MyButton resizeButton = buildResizeButton(lab5FiguresPanel);
+        MyButton rotateEllipseButton = buildRotateEllipse(lab5FiguresPanel);
 
 
-        JButton deleteFigureButton = buildDeleteFigures(lab5FiguresPanel);
+        MyButton deleteFigureButton = buildDeleteFigures(lab5FiguresPanel);
 
-        JButton moveToOnePoint = new javax.swing.JButton("Переместить в одну точку");
+        JButton moveToOnePoint = new JButton("Переместить в одну точку");
         moveToOnePoint.addActionListener(e -> lab5FiguresPanel.moveToObePoint(getFiguresTypesSelectedItem()));
 
 
@@ -50,40 +51,41 @@ public class Lab5ControlPanel extends JPanel {
         });
     }
 
-    private JButton buildMoveButton(Lab5FiguresPanel figuresPanel) {
-        JButton moveFigureButton = new JButton("Переместить");
+    private MyButton buildMoveButton(Lab5FiguresPanel figuresPanel) {
+        MyButton moveFigureButton = new MyButton("Переместить", this);
         moveFigureButton.addActionListener(e -> figuresPanel.moveFigures(getFiguresTypesSelectedItem()));
         return moveFigureButton;
     }
 
-    private JButton buildVisibleChangeButton(Lab5FiguresPanel figuresPanel) {
-        JButton visibleChangeButton = new JButton("Изменить видимость");
+    private MyButton buildVisibleChangeButton(Lab5FiguresPanel figuresPanel) {
+        MyButton visibleChangeButton = new MyButton("Изменить видимость", this);
         visibleChangeButton.addActionListener(e -> figuresPanel.changeFiguresVisible(getFiguresTypesSelectedItem()));
         return visibleChangeButton;
     }
 
-    private JButton buildCreateButton(Lab5FiguresPanel figuresPanel) {
-        JButton createFigureButton = new JButton("Создать");
+    private MyButton buildCreateButton(Lab5FiguresPanel figuresPanel) {
+        MyButton createFigureButton = new MyButton("Создать", this);
         createFigureButton.addActionListener(e -> figuresPanel.createFiguresList(getFiguresTypesSelectedItem()));
         return createFigureButton;
     }
 
-    private JButton buildResizeButton(Lab5FiguresPanel figuresPanel) {
-        JButton resizeButton = new JButton("Изменить размер");
+    private MyButton buildResizeButton(Lab5FiguresPanel figuresPanel) {
+        MyButton resizeButton = new MyButton("Изменить размер", this);
         resizeButton.addActionListener(e -> figuresPanel.resizeFigures(getFiguresTypesSelectedItem()));
         return resizeButton;
     }
 
-    private JButton buildRotateEllipse(Lab5FiguresPanel figuresPanel) {
-        JButton rotateEllipse = new JButton("Повернуть эллипс");
+    private MyButton buildRotateEllipse(Lab5FiguresPanel figuresPanel) {
+        MyButton rotateEllipse = new MyButton("Повернуть эллипс", this);
 
         rotateEllipse.addActionListener(e -> figuresPanel.rotateEllipse());
 
         return rotateEllipse;
     }
 
-    private JButton buildDeleteFigures(Lab5FiguresPanel figuresPanel) {
-        JButton deleteButton = new JButton("Удалить");
+    private MyButton buildDeleteFigures(Lab5FiguresPanel figuresPanel) {
+        MyButton deleteButton = new MyButton("Удалить", this);
+        deleteButton.addActionListener(e -> requestFocus());
         deleteButton.addActionListener(e -> figuresPanel.deleteFigures(getFiguresTypesSelectedItem()));
         return deleteButton;
     }

@@ -1,6 +1,8 @@
-package org.example.labWork6_array;
+package org.example.labWork6.labWork6_array;
 
-import org.example.labWork6_array.figures.TFigure;
+import org.example.labWork6.Condition;
+import org.example.labWork6.Process;
+import org.example.labWork6.figures.TFigure;
 
 import java.util.Arrays;
 

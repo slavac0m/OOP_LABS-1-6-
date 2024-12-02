@@ -10,8 +10,10 @@ import org.example.labWork4.panels.Lab4ControlPanel;
 import org.example.labWork4.panels.Lab4FiguresPanel;
 import org.example.labWork5.panels.Lab5ControlPanel;
 import org.example.labWork5.panels.Lab5FiguresPanel;
-import org.example.labWork6_array.panels.Lab6ArrayControlPanel;
-import org.example.labWork6_array.panels.Lab6ArrayFiguresPanel;
+import org.example.labWork6.labWork6_array.panels.Lab6ArrayControlPanel;
+import org.example.labWork6.labWork6_array.panels.Lab6ArrayFiguresPanel;
+import org.example.labWork6.labWork6_linked.panels.Lab6LinkedControlPanel;
+import org.example.labWork6.labWork6_linked.panels.Lab6LinkedFiguresPanel;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -19,7 +21,7 @@ import java.util.regex.Pattern;
 public class Main {
     public static void main(String[] args) {
 //        String choice = getChoice();
-        String choice = "6-1";
+        String choice = "6-2";
         MainFrame mainFrame;
 
         switch (choice) {
@@ -53,6 +55,11 @@ public class Main {
                 mainFrame = new MainFrame(choice, panel, new Lab6ArrayControlPanel(panel));
                 mainFrame.setVisible(true);
             }
+            case "6-2" -> {
+                Lab6LinkedFiguresPanel panel = new Lab6LinkedFiguresPanel();
+                mainFrame = new MainFrame(choice, panel, new Lab6LinkedControlPanel(panel));
+                mainFrame.setVisible(true);
+            }
         }
     }
 
@@ -71,8 +78,8 @@ public class Main {
                     "[3] Лабораторная работа №3\n" +
                     "[4] Лабораторная работа №4\n" +
                     "[5] Лабораторная работа №5\n" +
-                    "[6] Лабораторная работа №6-1\n" +
-                    "[7] Лабораторная работа №6-2\n" +
+                    "[6-1] Лабораторная работа №6 с Array\n" +
+                    "[6-2] Лабораторная работа №6 c Linked\n" +
                     "[0] Выход\n");
             choice = scanner.nextLine();
         }

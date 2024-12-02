@@ -1,4 +1,4 @@
-package org.example.labWork6_array.figures;
+package org.example.labWork6.figures;
 
 
 import org.example.MyPoint;

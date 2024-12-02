@@ -1,15 +1,15 @@
-package org.example.labWork6_array;
+package org.example.labWork6.labWork6_array;
 
 import org.example.Constants;
 import org.example.Constants.FigureType;
 import org.example.MyPoint;
 import org.example.Utils;
-import org.example.labWork6_array.figures.secLayer.Circle;
-import org.example.labWork6_array.figures.secLayer.Quadrangle;
-import org.example.labWork6_array.figures.thirdLayer.Ellipse;
-import org.example.labWork6_array.figures.thirdLayer.Rectangle;
-import org.example.labWork6_array.figures.thirdLayer.Rhombus;
-import org.example.labWork6_array.figures.thirdLayer.Trapezoid;
+import org.example.labWork6.figures.secLayer.Circle;
+import org.example.labWork6.figures.secLayer.Quadrangle;
+import org.example.labWork6.figures.thirdLayer.Ellipse;
+import org.example.labWork6.figures.thirdLayer.Rectangle;
+import org.example.labWork6.figures.thirdLayer.Rhombus;
+import org.example.labWork6.figures.thirdLayer.Trapezoid;
 
 import java.awt.*;
 

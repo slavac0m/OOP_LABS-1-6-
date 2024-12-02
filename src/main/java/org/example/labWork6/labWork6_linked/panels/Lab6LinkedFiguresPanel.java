@@ -1,32 +1,31 @@
-package org.example.labWork6_array.panels;
+package org.example.labWork6.labWork6_linked.panels;
 
 import org.example.Constants;
 import org.example.Constants.FigureType;
 import org.example.MyPoint;
 import org.example.Utils;
-import org.example.labWork6_array.CreateFigures;
-import org.example.labWork6_array.MyArrayList;
-import org.example.labWork6_array.figures.TFigure;
-import org.example.labWork6_array.figures.secLayer.Circle;
-import org.example.labWork6_array.figures.secLayer.Quadrangle;
-import org.example.labWork6_array.figures.thirdLayer.Ellipse;
-import org.example.labWork6_array.figures.thirdLayer.Rectangle;
-import org.example.labWork6_array.figures.thirdLayer.Rhombus;
-import org.example.labWork6_array.figures.thirdLayer.Trapezoid;
+import org.example.labWork6.figures.TFigure;
+import org.example.labWork6.figures.secLayer.Circle;
+import org.example.labWork6.figures.secLayer.Quadrangle;
+import org.example.labWork6.figures.thirdLayer.Ellipse;
+import org.example.labWork6.figures.thirdLayer.Rhombus;
+import org.example.labWork6.figures.thirdLayer.Trapezoid;
+import org.example.labWork6.figures.thirdLayer.Rectangle;
+import org.example.labWork6.labWork6_linked.CreateFigures;
+import org.example.labWork6.labWork6_linked.MyLinkedList;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Lab6ArrayFiguresPanel extends JPanel {
+public class Lab6LinkedFiguresPanel extends JPanel {
 
-    private MyArrayList figures;
+    private MyLinkedList figures = new MyLinkedList();
+
     private final CreateFigures createFigures;
-    private final Utils utils;
+    private final Utils utils = new Utils();
 
-    public Lab6ArrayFiguresPanel() {
-        figures = new MyArrayList();
+    public Lab6LinkedFiguresPanel() {
         createFigures = new CreateFigures();
-        utils = new Utils();
     }
 
     public void createFiguresList(FigureType type) {
@@ -35,13 +34,15 @@ public class Lab6ArrayFiguresPanel extends JPanel {
     }
 
     public void changeFiguresVisible(FigureType type) {
-        figures.filter(e -> checking(type, e)).forEach(figure -> figure.setVisible(!figure.isVisible()));
+        figures.filter(e -> checking(type, e))
+                .forEach(figure -> figure.setVisible(!figure.isVisible()));
         repaint();
     }
 
     public void moveFigures(FigureType type) {
-        figures.filter(e -> checking(type, e)).forEach(figure ->
-                figure.moveTo(
+        figures.filter(e -> checking(type, e))
+                .forEach(figure ->
+                    figure.moveTo(
                         utils.getRandomInt(-50, 50),
                         utils.getRandomInt(-50, 50)
                 )
@@ -89,23 +90,14 @@ public class Lab6ArrayFiguresPanel extends JPanel {
                         ((Quadrangle) e).scale((double) utils.getRandomInt(60, 130) / 100);
                     }
                     break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + type);
+                default: throw new IllegalStateException("Unexpected value: " + type);
             }
         });
         repaint();
     }
 
     public void deleteFigures(FigureType type) {
-        int i = 0;
-        while (i < figures.size()) {
-            if (checking(type, figures.get(i))) {
-                figures.get(i).erase();
-                figures.remove(i);
-                i--;
-            }
-            i++;
-        }
+        figures.removeIf(figure -> checking(type, figure));
         repaint();
     }
 
@@ -121,11 +113,10 @@ public class Lab6ArrayFiguresPanel extends JPanel {
         };
     }
 
-    public void rotateEllipse() {
-        figures.filter(e -> checking(FigureType.ELLIPSE, e)).forEach(figure -> ((Ellipse) figure).rotate());
+    public void rotateEllipse(){
+        figures.filter(e-> checking(FigureType.ELLIPSE, e)).forEach(figure -> ((Ellipse) figure).rotate());
         repaint();
     }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
