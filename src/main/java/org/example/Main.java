@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class Main {
     public static void main(String[] args) {
 //        String choice = getChoice();
-        String choice = "4";
+        String choice = "5";
         MainFrame mainFrame;
 
         switch (choice) {

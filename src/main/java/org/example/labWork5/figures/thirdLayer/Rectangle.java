@@ -4,10 +4,9 @@ import org.example.MyPoint;
 import org.example.labWork5.figures.secLayer.Quadrangle;
 
 import java.awt.*;
-import java.util.Arrays;
 
 public class Rectangle extends Quadrangle {
-
+    private int width, height;
 
     public Rectangle(MyPoint topLeft, int width, int height, Color color) {
         super(
@@ -18,27 +17,52 @@ public class Rectangle extends Quadrangle {
                         new MyPoint(topLeft.getX(), topLeft.getY() + height),
                 },
                 color);
+        this.width = width;
+        this.height = height;
         System.out.println("[CREATE] " + this);
     }
 
-    public void rotate(){
-        MyPoint topLeft = getPoints()[0];
-        for (int i = 1; i < getPoints().length; i++) {
-            MyPoint point = getPoints()[i];
-            int newX = topLeft.getX() + (point.getY() - topLeft.getY());
-            int newY = topLeft.getY() - (point.getX() - topLeft.getX());
-            point.setX(newX);
-            point.setY(newY);
-        }
-        System.out.println("[ROTATE] " + this);
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+        MyPoint[] points = getPoints();
+        setPoints(new MyPoint[]{
+                points[0],
+                new MyPoint(points[0].getX() + width, points[0].getY()),
+                new MyPoint(points[0].getX() + width, points[2].getY()),
+                new MyPoint(points[0].getX(), points[2].getY())
+        });
+    }
+
+
+    public void setHeight(int height) {
+        this.height = height;
+        MyPoint[] points = getPoints();
+        setPoints(new MyPoint[]{
+                points[0],
+                new MyPoint(points[0].getX() + width, points[0].getY()),
+                new MyPoint(points[0].getX() + width, points[0].getY() + height),
+                new MyPoint(points[0].getX(), points[0].getY() + height)
+        });
     }
 
     @Override
     public String toString() {
-        return "Rectangle={" +
-                "points=" + Arrays.toString(getPoints()) +
-                "}";
+        return "Rectangle{" +
+                "width=" + getWidth() +
+                ", height=" + getHeight() +
+                ", center=" + getCenter() +
+                ", color=" + getColor() +
+                '}';
     }
+
 
     @Override
     protected void finalize() throws Throwable {

@@ -26,25 +26,25 @@ public class CreateFigures {
         this.frameHeight = Constants.FRAME_HIGH;
     }
 
-    public ArrayList<TFigure> getNewRandomFigures() {
-
-        int count = utils.getRandomInt(4,13);
-        ArrayList<TFigure> figures = new ArrayList<>(createRandomCircleList(count));
-
-        count = utils.getRandomInt(4,13);
-        figures.addAll(createRandomEllipseList(count));
-
-        count = utils.getRandomInt(4,13);
-        figures.addAll(createRandomQuadrangleList(count));
-
-        count = utils.getRandomInt(4,13);
-        figures.addAll(createRandomRectangleList(count));
-
-        count = utils.getRandomInt(4,13);
-        figures.addAll(createRandomRhombusList(count));
-
-        count = utils.getRandomInt(4,13);
-        figures.addAll(createRandomTrapezoidList(count));
+    public ArrayList<TFigure> getNewRandomFigures(FigureType type) {
+        ArrayList<TFigure> figures = new ArrayList<>();
+        switch (type) {
+            case ALL ->{
+                figures.addAll(createRandomCircleList(utils.getRandomInt(4, 13)));
+                figures.addAll(createRandomEllipseList(utils.getRandomInt(4, 13)));
+                figures.addAll(createRandomQuadrangleList(utils.getRandomInt(4, 13)));
+                figures.addAll(createRandomRectangleList(utils.getRandomInt(4, 13)));
+                figures.addAll(createRandomRhombusList(utils.getRandomInt(4, 13)));
+                figures.addAll(createRandomTrapezoidList(utils.getRandomInt(4, 13)));
+            }
+            case CIRCLE -> figures.addAll(createRandomCircleList(utils.getRandomInt(4, 13)));
+            case ELLIPSE -> figures.addAll(createRandomEllipseList(utils.getRandomInt(4, 13)));
+            case QUADRANGLE -> figures.addAll(createRandomQuadrangleList(utils.getRandomInt(4, 13)));
+            case RECTANGLE -> figures.addAll(createRandomRectangleList(utils.getRandomInt(4, 13)));
+            case RHOMBUS -> figures.addAll(createRandomRhombusList(utils.getRandomInt(4, 13)));
+            case TRAPEZOID -> figures.addAll(createRandomTrapezoidList(utils.getRandomInt(4, 13)));
+            default -> throw new IllegalArgumentException("Unsupported figure type: " + type);
+        }
 
         return figures;
     }
@@ -54,7 +54,7 @@ public class CreateFigures {
         int y = utils.getRandomInt(frameHeight);
         int r = utils.getRandomInt(20, 55);
         Color color = utils.getRandomColor();
-        return new Circle(new MyPoint(x, y), r, color);
+        return new Circle(new MyPoint(x, y), color,r);
     }
 
     public ArrayList<Circle> createRandomCircleList(int count) {

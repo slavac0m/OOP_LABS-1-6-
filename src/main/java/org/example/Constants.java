@@ -13,13 +13,13 @@ public class Constants {
     public static final Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE,Color.CYAN, Color.DARK_GRAY, Color.ORANGE, Color.YELLOW};
 
     public enum FigureType {
+        ALL("ALL", 5),
         CIRCLE("CIRCLE", 0),
         ELLIPSE("ELLIPSE", 1),
         QUADRANGLE("QUADRANGLE", 2),
         RECTANGLE("RECTANGLE", 3),
         RHOMBUS("RHOMBUS", 4),
-        TRAPEZOID("TRAPEZOID", 5),
-        ALL("ALL", 5);
+        TRAPEZOID("TRAPEZOID", 5);
 
         private final String name;
         private final int index;
