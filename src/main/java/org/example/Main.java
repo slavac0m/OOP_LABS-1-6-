@@ -10,6 +10,8 @@ import org.example.labWork4.panels.Lab4ControlPanel;
 import org.example.labWork4.panels.Lab4FiguresPanel;
 import org.example.labWork5.panels.Lab5ControlPanel;
 import org.example.labWork5.panels.Lab5FiguresPanel;
+import org.example.labWork6_array.panels.Lab6ArrayControlPanel;
+import org.example.labWork6_array.panels.Lab6ArrayFiguresPanel;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -17,7 +19,7 @@ import java.util.regex.Pattern;
 public class Main {
     public static void main(String[] args) {
 //        String choice = getChoice();
-        String choice = "5";
+        String choice = "6-1";
         MainFrame mainFrame;
 
         switch (choice) {
@@ -46,7 +48,10 @@ public class Main {
                 mainFrame = new MainFrame(choice, panel, new Lab5ControlPanel(panel));
                 mainFrame.setVisible(true);
             }
-            case "6" -> {
+            case "6-1" -> {
+                Lab6ArrayFiguresPanel panel = new Lab6ArrayFiguresPanel();
+                mainFrame = new MainFrame(choice, panel, new Lab6ArrayControlPanel(panel));
+                mainFrame.setVisible(true);
             }
         }
     }

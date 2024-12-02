@@ -1,7 +1,7 @@
-package org.example.labWork4.figures.secLayer;
+package org.example.labWork6_linked.figures.secLayer;
 
 import org.example.MyPoint;
-import org.example.labWork4.figures.TFigure;
+import org.example.labWork6_linked.figures.TFigure;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -80,6 +80,16 @@ public class Quadrangle extends TFigure {
         System.out.println("[ROTATE] " + this);
     }
 
+    public void scale(double factor) {
+        for (MyPoint point : points) {
+            int newX = (int) (point.getX() * factor);
+            int newY = (int) (point.getY() * factor);
+            point.setX(newX);
+            point.setY(newY);
+        }
+        System.out.println("[SCALE] Factor: " + factor + ", " + this);
+    }
+
     public MyPoint[] getPoints() {
         return points;
     }
@@ -87,6 +97,7 @@ public class Quadrangle extends TFigure {
     public void setPoints(MyPoint[] points) {
         this.points = points;
     }
+
 
     @Override
     public String toString() {
