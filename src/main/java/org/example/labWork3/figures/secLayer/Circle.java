@@ -7,7 +7,7 @@ import java.awt.*;
 
 
 public class Circle extends TFigure {
-    int r;
+    private int r;
 
     public Circle(MyPoint point, int r, Color color) {
         super(point, color);

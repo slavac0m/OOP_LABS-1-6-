@@ -50,11 +50,11 @@ public class Ellipse extends Circle {
     }
 
     public int getSmallAxis() {
-        return getR();
+        return super.getR();
     }
 
     public void setSmallAxis(int smallAxis) {
-        setR(smallAxis);
+        super.setR(smallAxis);
     }
 
 

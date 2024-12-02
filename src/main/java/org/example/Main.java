@@ -20,8 +20,8 @@ import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
-//        String choice = getChoice();
-        String choice = "6-2";
+        String choice = getChoice();
+//        String choice = "4";
         MainFrame mainFrame;
 
         switch (choice) {

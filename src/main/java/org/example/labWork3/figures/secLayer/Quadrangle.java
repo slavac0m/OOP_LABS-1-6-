@@ -11,9 +11,23 @@ public class Quadrangle extends TFigure {
     private MyPoint[] points;
 
     public Quadrangle(MyPoint[] points, Color color) {
-        super(points[0], color);
         if (points.length != 4) throw new IllegalArgumentException("Четырехугольник должен иметь 4 вершины.");
-        this.points = orderPoints(points);
+        int centerX = 0, centerY = 0;
+
+        for (int i = 0; i < 4; i++) {
+            centerX += points[i].getX();
+            centerY += points[i].getY();
+        }
+
+        super(new MyPoint(centerX/4, centerY/4), color);
+
+        for (int i = 0; i < 4; i++)
+            this.points[i] = new MyPoint(
+                    points[i].getX() - centerX,
+                    points[i].getY() - centerY
+            );
+
+        this.points = orderPoints(this.points);
         System.out.println("[CREATE] " + this);
     }
 
@@ -38,10 +52,11 @@ public class Quadrangle extends TFigure {
     public void rotate() {
         MyPoint center = getPoints()[0];
         for (MyPoint point : points) {
-            int newX = center.getX() + (point.getY() - center.getY());
-            int newY = center.getY() - (point.getX() - center.getX());
-            point.setX(newX);
-            point.setY(newY);
+            int relativeX = point.getX();
+            int relativeY = point.getY();
+
+            point.setX(-relativeY);
+            point.setY(relativeX);
         }
         System.out.println("[ROTATE] " + this);
     }
@@ -74,7 +89,7 @@ public class Quadrangle extends TFigure {
 
     @Override
     public void moveTo(int dX, int dY) {
-        for (int i =0; i < 4; i++)points[i].moveTo(dX, dY);
+        for (int i =0; i < 4; i++) points[i].moveTo(dX, dY);
     }
 
     @Override
