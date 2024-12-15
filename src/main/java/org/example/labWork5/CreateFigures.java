@@ -13,7 +13,6 @@ import org.example.labWork5.figures.thirdLayer.Rhombus;
 import org.example.labWork5.figures.thirdLayer.Trapezoid;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class CreateFigures {
     Utils utils = new Utils();
@@ -26,24 +25,27 @@ public class CreateFigures {
         this.frameHeight = Constants.FRAME_HIGH;
     }
 
-    public ArrayList<TFigure> getNewRandomFigures(FigureType type) {
-        ArrayList<TFigure> figures = new ArrayList<>();
-        switch (type) {
-            case ALL ->{
-                figures.addAll(createRandomCircleList(utils.getRandomInt(4, 13)));
-                figures.addAll(createRandomEllipseList(utils.getRandomInt(4, 13)));
-                figures.addAll(createRandomQuadrangleList(utils.getRandomInt(4, 13)));
-                figures.addAll(createRandomRectangleList(utils.getRandomInt(4, 13)));
-                figures.addAll(createRandomRhombusList(utils.getRandomInt(4, 13)));
-                figures.addAll(createRandomTrapezoidList(utils.getRandomInt(4, 13)));
+    public TFigure[] getNewRandomFigures() {
+
+        TFigure[] figures = new TFigure[utils.getRandomInt(20,30)];
+        for (int i = 0; i < figures.length; i++) {
+            
+            FigureType type;
+            type = FigureType.valueOf(
+                    FigureType.getNames()[utils.getRandomInt(
+                            FigureType.values().length -1
+                    )]
+            );
+
+            switch (type) {
+                case CIRCLE -> figures[i] = createRandomCircle();
+                case ELLIPSE -> figures[i] = createRandomEllipse();
+                case QUADRANGLE -> figures[i] = createRandomQuadrangle();
+                case RECTANGLE -> figures[i] = createRandomRectangle();
+                case RHOMBUS -> figures[i] = createRandomRhombus();
+                case TRAPEZOID -> figures[i] = createRandomTrapezoid();
             }
-            case CIRCLE -> figures.addAll(createRandomCircleList(utils.getRandomInt(4, 13)));
-            case ELLIPSE -> figures.addAll(createRandomEllipseList(utils.getRandomInt(4, 13)));
-            case QUADRANGLE -> figures.addAll(createRandomQuadrangleList(utils.getRandomInt(4, 13)));
-            case RECTANGLE -> figures.addAll(createRandomRectangleList(utils.getRandomInt(4, 13)));
-            case RHOMBUS -> figures.addAll(createRandomRhombusList(utils.getRandomInt(4, 13)));
-            case TRAPEZOID -> figures.addAll(createRandomTrapezoidList(utils.getRandomInt(4, 13)));
-            default -> throw new IllegalArgumentException("Unsupported figure type: " + type);
+
         }
 
         return figures;
@@ -57,11 +59,11 @@ public class CreateFigures {
         return new Circle(new MyPoint(x, y), color,r);
     }
 
-    public ArrayList<Circle> createRandomCircleList(int count) {
-        ArrayList<Circle> circles = new ArrayList<>();
-        for (int i = 0; i < count; i++)circles.add(createRandomCircle());
-        return circles;
-    }
+
+
+
+
+
 
     public Ellipse createRandomEllipse() {
         int x = utils.getRandomInt(frameWidth);
@@ -71,12 +73,7 @@ public class CreateFigures {
         Color color = utils.getRandomColor();
         return new Ellipse(new MyPoint(x, y), r, axis, color);
     }
-
-    public ArrayList<Ellipse> createRandomEllipseList(int count) {
-        ArrayList<Ellipse> ellipses = new ArrayList<>();
-        for (int i = 0; i < count; i++) ellipses.add(createRandomEllipse());
-        return ellipses;
-    }
+    
 
     public Quadrangle createRandomQuadrangle() {
         MyPoint[] points = new MyPoint[4];
@@ -85,11 +82,7 @@ public class CreateFigures {
         return new Quadrangle(points, color);
     }
 
-    public ArrayList<Quadrangle> createRandomQuadrangleList(int count) {
-        ArrayList<Quadrangle> quadrangles = new ArrayList<>();
-        for (int i = 0; i < count; i++) quadrangles.add(createRandomQuadrangle());
-        return quadrangles;
-    }
+  
 
     public Rectangle createRandomRectangle() {
         MyPoint point = utils.getRandomPoint();
@@ -99,11 +92,6 @@ public class CreateFigures {
         return new Rectangle(point, width, high, color);
     }
 
-    public ArrayList<Rectangle> createRandomRectangleList(int count) {
-        ArrayList<Rectangle> rectangles = new ArrayList<>();
-        for (int i = 0; i < count; i++) rectangles.add(createRandomRectangle());
-        return rectangles;
-    }
 
     public Rhombus createRandomRhombus() {
         MyPoint center = utils.getRandomPoint();
@@ -113,11 +101,6 @@ public class CreateFigures {
         return new Rhombus(center, diagonal1, diagonal2, color);
     }
 
-    public ArrayList<Rhombus> createRandomRhombusList(int count) {
-        ArrayList<Rhombus> rhombuses = new ArrayList<>();
-        for (int i = 0; i < count; i++) rhombuses.add(createRandomRhombus());
-        return rhombuses;
-    }
 
     public Trapezoid createRandomTrapezoid() {
         MyPoint topLeft = utils.getRandomPoint();
@@ -127,11 +110,6 @@ public class CreateFigures {
         int height = utils.getRandomInt(20, 80);
         return new Trapezoid(topLeft, topWidth, bottomWidth, height, color);
     }
-
-    public ArrayList<Trapezoid> createRandomTrapezoidList(int count) {
-        ArrayList<Trapezoid> trapezoids = new ArrayList<>();
-        for (int i = 0; i < count; i++) trapezoids.add(createRandomTrapezoid());
-        return trapezoids;
-    }
+    
 
 }

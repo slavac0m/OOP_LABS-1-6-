@@ -65,7 +65,7 @@ public class Lab5ControlPanel extends JPanel {
 
     private MyButton buildCreateButton(Lab5FiguresPanel figuresPanel) {
         MyButton createFigureButton = new MyButton("Создать", this);
-        createFigureButton.addActionListener(e -> figuresPanel.createFiguresList(getFiguresTypesSelectedItem()));
+        createFigureButton.addActionListener(e -> figuresPanel.createFiguresList());
         return createFigureButton;
     }
 
