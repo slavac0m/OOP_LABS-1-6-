@@ -55,10 +55,9 @@ public class Lab5FiguresPanel extends JPanel {
 
     public void moveToObePoint(FigureType type) {
         if (figures == null) return;
-        MyPoint frameCenter = new MyPoint(Constants.FRAME_WIDTH / 2, Constants.FRAME_HIGH / 2);
         for (TFigure figure : figures) {
             if (checking(type, figure))
-                figure.setCenter(frameCenter);
+                figure.setCenter(new MyPoint(Constants.FRAME_WIDTH / 2, Constants.FRAME_HIGH / 2));
         }
         repaint();
     }

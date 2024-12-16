@@ -1,7 +1,6 @@
 package org.example.labWork6.labWork6_linked;
 
 import org.example.Constants;
-import org.example.Constants.FigureType;
 import org.example.MyPoint;
 import org.example.Utils;
 import org.example.labWork6.figures.secLayer.Circle;
@@ -24,25 +23,16 @@ public class CreateFigures {
         this.frameHeight = Constants.FRAME_HIGH;
     }
 
-    public MyLinkedList getNewRandomFigures(FigureType type) {
+    public MyLinkedList getNewRandomFigures() {
         MyLinkedList figures = new MyLinkedList();
-        switch (type) {
-            case ALL -> {
-                figures.addAll(createRandomCircleList(utils.getRandomInt(4, 13)));
-                figures.addAll(createRandomEllipseList(utils.getRandomInt(4, 13)));
-                figures.addAll(createRandomQuadrangleList(utils.getRandomInt(4, 13)));
-                figures.addAll(createRandomRectangleList(utils.getRandomInt(4, 13)));
-                figures.addAll(createRandomRhombusList(utils.getRandomInt(4, 13)));
-                figures.addAll(createRandomTrapezoidList(utils.getRandomInt(4, 13)));
-            }
-            case CIRCLE -> figures.addAll(createRandomCircleList(utils.getRandomInt(4, 13)));
-            case ELLIPSE -> figures.addAll(createRandomEllipseList(utils.getRandomInt(4, 13)));
-            case QUADRANGLE -> figures.addAll(createRandomQuadrangleList(utils.getRandomInt(4, 13)));
-            case RECTANGLE -> figures.addAll(createRandomRectangleList(utils.getRandomInt(4, 13)));
-            case RHOMBUS -> figures.addAll(createRandomRhombusList(utils.getRandomInt(4, 13)));
-            case TRAPEZOID -> figures.addAll(createRandomTrapezoidList(utils.getRandomInt(4, 13)));
-            default -> throw new IllegalArgumentException("Unsupported figure type: " + type);
-        }
+
+        figures.addAll(createRandomCircleList(utils.getRandomInt(4, 13)));
+        figures.addAll(createRandomEllipseList(utils.getRandomInt(4, 13)));
+        figures.addAll(createRandomQuadrangleList(utils.getRandomInt(4, 13)));
+        figures.addAll(createRandomRectangleList(utils.getRandomInt(4, 13)));
+        figures.addAll(createRandomRhombusList(utils.getRandomInt(4, 13)));
+        figures.addAll(createRandomTrapezoidList(utils.getRandomInt(4, 13)));
+            
 
         return figures;
     }
@@ -98,7 +88,7 @@ public class CreateFigures {
     }
 
     public MyLinkedList createRandomRectangleList(int count) {
-       MyLinkedList rectangles = new MyLinkedList();
+        MyLinkedList rectangles = new MyLinkedList();
         for (int i = 0; i < count; i++) rectangles.add(createRandomRectangle());
         return rectangles;
     }

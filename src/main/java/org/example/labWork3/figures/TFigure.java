@@ -28,24 +28,31 @@ public abstract class TFigure {
     public Color getColor() {
         return color;
     }
+
     public void setColor(Color color) {
         this.color = color;
     }
+
     public MyPoint getPoint() {
         return point;
     }
+
     public void setPoint(MyPoint point) {
         this.point = point;
     }
+
     public boolean isVisible() {
         return visible;
     }
+
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
+
     public Graphics getGraphics() {
         return graphics;
     }
+
     public void setGraphics(Graphics graphics) {
         this.graphics = graphics;
     }

@@ -24,25 +24,14 @@ public class CreateFigures {
         this.frameHeight = Constants.FRAME_HIGH;
     }
 
-    public MyArrayList getNewRandomFigures(FigureType type) {
+    public MyArrayList getNewRandomFigures() {
         MyArrayList figures = new MyArrayList();
-        switch (type) {
-            case ALL ->{
-                figures.addAll(createRandomCircleList(utils.getRandomInt(4, 13)));
-                figures.addAll(createRandomEllipseList(utils.getRandomInt(4, 13)));
-                figures.addAll(createRandomQuadrangleList(utils.getRandomInt(4, 13)));
-                figures.addAll(createRandomRectangleList(utils.getRandomInt(4, 13)));
-                figures.addAll(createRandomRhombusList(utils.getRandomInt(4, 13)));
-                figures.addAll(createRandomTrapezoidList(utils.getRandomInt(4, 13)));
-            }
-            case CIRCLE -> figures.addAll(createRandomCircleList(utils.getRandomInt(4, 13)));
-            case ELLIPSE -> figures.addAll(createRandomEllipseList(utils.getRandomInt(4, 13)));
-            case QUADRANGLE -> figures.addAll(createRandomQuadrangleList(utils.getRandomInt(4, 13)));
-            case RECTANGLE -> figures.addAll(createRandomRectangleList(utils.getRandomInt(4, 13)));
-            case RHOMBUS -> figures.addAll(createRandomRhombusList(utils.getRandomInt(4, 13)));
-            case TRAPEZOID -> figures.addAll(createRandomTrapezoidList(utils.getRandomInt(4, 13)));
-            default -> throw new IllegalArgumentException("Unsupported figure type: " + type);
-        }
+        figures.addAll(createRandomCircleList(utils.getRandomInt(4, 13)));
+        figures.addAll(createRandomEllipseList(utils.getRandomInt(4, 13)));
+        figures.addAll(createRandomQuadrangleList(utils.getRandomInt(4, 13)));
+        figures.addAll(createRandomRectangleList(utils.getRandomInt(4, 13)));
+        figures.addAll(createRandomRhombusList(utils.getRandomInt(4, 13)));
+        figures.addAll(createRandomTrapezoidList(utils.getRandomInt(4, 13)));
 
         return figures;
     }

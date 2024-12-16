@@ -1,9 +1,10 @@
 package org.example.labWork6.labWork6_array;
 
-import org.example.labWork6.Condition;
-import org.example.labWork6.Process;
+import org.example.MyPoint;
+import org.example.Utils;
 import org.example.labWork6.figures.TFigure;
 
+import java.awt.*;
 import java.util.Arrays;
 
 public class MyArrayList {
@@ -23,6 +24,8 @@ public class MyArrayList {
             expandCapacity();
         }
     }
+
+
     private void expandCapacity() {
         int newCapacity = (int) (capacity * ratio);
         elements = Arrays.copyOf(elements, newCapacity);
@@ -40,19 +43,31 @@ public class MyArrayList {
         count += arrayList.size();
     }
 
-    public MyArrayList forEach(Process process) {
-        for (int i = 0; i < count; i++) process.process(elements[i]);
-        return this;
+    public void moveF(int dX, int dY) {
+        for (int i = 0; i < count; i++) elements[i].moveTo(dX, dY);
     }
 
-    public MyArrayList filter(Condition condition) {
-        MyArrayList newList = new MyArrayList();
+    public void moveF() {
         for (int i = 0; i < count; i++) {
-            if(condition.someCondition(elements[i]))
-                newList.add(elements[i]);
+            int dX = new Utils().getRandomInt(-50, 50);
+            int dY = new Utils().getRandomInt(-50, 50);
+            elements[i].moveTo(dX, dY);
         }
-        return newList;
     }
+
+    public void changeVisible() {
+        for (int i = 0; i < count; i++) elements[i].setVisible(!elements[i].isVisible());
+    }
+
+    public void paint(Graphics g) {
+        for (int i = 0; i < count; i++) elements[i].paint(g);
+    }
+
+
+    public void moveToOnePoint(int x, int y) {
+        for (int i = 0; i < count; i++) elements[i].setCenter(new MyPoint(x, y));
+    }
+
 
     public TFigure get(int index) {
         if (index < 0 || index >= count)

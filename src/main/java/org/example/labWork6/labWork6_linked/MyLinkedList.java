@@ -1,7 +1,10 @@
 package org.example.labWork6.labWork6_linked;
 
-import org.example.labWork6.Condition;
+import org.example.MyPoint;
+import org.example.Utils;
 import org.example.labWork6.figures.TFigure;
+
+import java.awt.*;
 
 public class MyLinkedList {
     private Node head;
@@ -34,47 +37,67 @@ public class MyLinkedList {
         size += list.size;
     }
 
-    public MyLinkedList forEach(Process process) {
+    public void moveF(int dX, int dY) {
         Node current = head;
         if (head != null) {
             while (current != null) {
-                process.process(current.data);
+                current.data.moveTo(dX, dY);
                 current = current.next;
             }
         }
-        return this;
     }
 
-    public MyLinkedList filter(Condition condition) {
-        MyLinkedList filteredList = new MyLinkedList();
+    public void moveF() {
         Node current = head;
-        while (current != null) {
-            if (condition.someCondition(current.data))
-                filteredList.add(current.data);
-            current = current.next;
+        if (head != null) {
+            while (current != null) {
+                int dX = new Utils().getRandomInt(-50, 50);
+                int dY = new Utils().getRandomInt(-50, 50);
+                current.data.moveTo(dX, dY);
+                current = current.next;
+                System.out.println(dX + " " + dY);
+            }
         }
-        return filteredList;
     }
 
-    public void removeIf(Condition condition) {
-        while (head != null && condition.someCondition(head.data)) {
+    public void changeVisible() {
+        Node current = head;
+        if (head != null) {
+            while (current != null) {
+                current.data.setVisible(!current.data.isVisible());
+                current = current.next;
+            }
+        }
+    }
+
+    public void paint(Graphics g) {
+        Node current = head;
+        if (head != null) {
+            while (current != null) {
+                current.data.paint(g);
+                current = current.next;
+            }
+        }
+    }
+
+    public void moveToOnePoint(int x, int y) {
+        Node current = head;
+        if (head != null) {
+            while (current != null) {
+                current.data.setCenter(new MyPoint(x,y));
+                current = current.next;
+            }
+        }
+    }
+
+    public void removeALl() {
+        while (head != null) {
+            Node temp = head;
             head = head.next;
+            temp.next = null;
             size--;
         }
-
-        if (head == null) {
-            tail = null;
-            return;
-        }
-
-        Node current = head;
-        while (current.next != null) {
-            if (condition.someCondition(current.next.data)) {
-                current.next = current.next.next;
-                size--;
-            } else current = current.next;
-        }
-        tail = current;
+        tail = null;
     }
 
     public TFigure get(int index) {
@@ -86,7 +109,10 @@ public class MyLinkedList {
         return current.data;
     }
 
-    public int size() { return size; }
+    public int size() {
+        return size;
+    }
+
     static class Node {
         TFigure data;
         Node next;
