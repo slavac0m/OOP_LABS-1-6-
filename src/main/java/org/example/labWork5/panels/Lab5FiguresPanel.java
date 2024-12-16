@@ -121,7 +121,7 @@ public class Lab5FiguresPanel extends JPanel {
             }
             i++;
         }
-        figures = null;
+        if (type == FigureType.ALL) figures= null;
         repaint();
     }
 
