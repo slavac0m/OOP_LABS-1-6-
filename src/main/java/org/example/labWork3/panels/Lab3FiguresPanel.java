@@ -241,11 +241,9 @@ public class Lab3FiguresPanel extends JPanel {
 
     public void changeRectangleList() {
         if (rectangles != null) {
-            Arrays.stream(rectangles).forEach(e -> {
-                int diffWidth = utils.getRandomInt(20, 100);
-                int diffHeight = utils.getRandomInt(20, 100);
-//                e.changeForm(diffWidth, diffHeight);
-            });
+            for (Rectangle e : rectangles) {
+                e.rotate();
+            }
         }
         repaint();
     }

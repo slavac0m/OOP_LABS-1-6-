@@ -6,9 +6,8 @@ import org.example.labWork3.figures.TFigure;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.Comparator;
-
 public class Quadrangle extends TFigure {
-    private MyPoint[] points;
+    private MyPoint[] points = new MyPoint[4];
 
     public Quadrangle(MyPoint[] points, Color color) {
         if (points.length != 4) throw new IllegalArgumentException("Четырехугольник должен иметь 4 вершины.");
@@ -19,7 +18,10 @@ public class Quadrangle extends TFigure {
             centerY += points[i].getY();
         }
 
-        super(new MyPoint(centerX/4, centerY/4), color);
+        centerX /= 4;
+        centerY /= 4;
+
+        super(new MyPoint(centerX, centerY), color);
 
         for (int i = 0; i < 4; i++)
             this.points[i] = new MyPoint(
@@ -28,52 +30,12 @@ public class Quadrangle extends TFigure {
             );
 
         this.points = orderPoints(this.points);
+
         System.out.println("[CREATE] " + this);
     }
 
-    @Override
-    public void paint(Graphics g) {
-        if (!isVisible()) return;
-        setGraphics(g);
-        g.setColor(getColor());
-
-        int[] xPoints = new int[4];
-        int[] yPoints = new int[4];
-
-        for (int i = 0; i < 4; i++) {
-            xPoints[i] = points[i].getX();
-            yPoints[i] = points[i].getY();
-        }
-        g.fillPolygon(xPoints, yPoints, 4);
-        g.setColor(Color.BLACK);
-        g.drawPolygon(xPoints, yPoints, 4);
-    }
-
-    public void rotate() {
-        MyPoint center = getPoints()[0];
-        for (MyPoint point : points) {
-            int relativeX = point.getX();
-            int relativeY = point.getY();
-
-            point.setX(-relativeY);
-            point.setY(relativeX);
-        }
-        System.out.println("[ROTATE] " + this);
-    }
-
-
-    public MyPoint[] getPoints() {
-        return points;
-    }
-
-    public void setPoints(MyPoint[] points) {
-        if (points.length != 4) throw new IllegalArgumentException("Четырехугольник должен иметь 4 вершины.");
-        this.points = orderPoints(points);
-    }
-
     private MyPoint[] orderPoints(MyPoint[] points) {
-        int centerX = 0;
-        int centerY = 0;
+        int centerX = 0, centerY = 0;
         for (MyPoint point : points) {
             centerX += point.getX();
             centerY += point.getY();
@@ -87,15 +49,55 @@ public class Quadrangle extends TFigure {
         return points;
     }
 
+
+    @Override
+    public void paint(Graphics g) {
+        if (!isVisible()) return;
+        setGraphics(g);
+        g.setColor(getColor());
+
+        int[] xPoints = new int[4];
+        int[] yPoints = new int[4];
+
+        for (int i = 0; i < 4; i++) {
+            xPoints[i] = points[i].getX() + getPoint().getX();
+            yPoints[i] = points[i].getY() + getPoint().getY();
+        }
+        g.fillPolygon(xPoints, yPoints, 4);
+        g.setColor(Color.BLACK);
+        g.drawPolygon(xPoints, yPoints, 4);
+    }
+
     @Override
     public void moveTo(int dX, int dY) {
-        for (int i =0; i < 4; i++) points[i].moveTo(dX, dY);
+        getPoint().moveTo(dX, dY);
+    }
+
+    public void rotate() {
+        for (MyPoint point : points) {
+            int relativeX = point.getX();
+            int relativeY = point.getY();
+
+            point.setX(-relativeY);
+            point.setY(relativeX);
+        }
+        System.out.println("[ROTATE] " + this);
+    }
+
+    public MyPoint[] getPoints() {
+        return points;
+    }
+
+    public void setPoints(MyPoint[] points) {
+        this.points = points;
     }
 
     @Override
     public String toString() {
         return "Quadrangle{" +
                 "points=" + Arrays.toString(points) +
+                ", center=" + getPoint() +
+                ", color=" + getColor() +
                 '}';
     }
 
